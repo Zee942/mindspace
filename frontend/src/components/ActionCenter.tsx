@@ -68,15 +68,16 @@ const TaskCard: React.FC<{
       onDragEnd={handleDragEnd}
     >
         <div style={styles.taskCardContent}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{color: 'var(--text-secondary)', flexShrink: 0}}><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
-            <span style={{ paddingRight: '6.5rem' }}>{task.content}</span>
-        </div>
-        <div style={{display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'center'}}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{color: 'var(--text-secondary)', flexShrink: 0}}><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+            <span style={{ paddingRight: '4.35rem', fontSize: '0.65rem' }}>{task.content}</span>
+          </div>
+        <div style={{display: 'flex', gap: '0.35rem', flexWrap: 'wrap', alignItems: 'center'}}>
           {linkedSkill && (
              <div style={{
                   ...styles.taskCardSkillBadge,
                   backgroundColor: linkedSkill.color ? d3.color(linkedSkill.color)!.copy({opacity: 0.2}).toString() : 'rgba(160, 102, 255, 0.2)',
                   color: linkedSkill.color ? d3.color(linkedSkill.color)!.brighter(1.5).toString() : '#d1b8ff',
+                  fontSize: '0.55rem',
               }}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c0 1.66 4 3 6 3s6-1.34 6-3v-5"></path></svg>
                   {linkedSkill.title}
@@ -87,6 +88,7 @@ const TaskCard: React.FC<{
                   ...styles.taskCardSkillBadge,
                   backgroundColor: d3.color(badgeColors['Goal'])!.copy({opacity: 0.2}).toString(),
                   color: d3.color(badgeColors['Goal'])!.brighter(1.5).toString(),
+                  fontSize: '0.55rem',
               }}>
                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
                   {linkedGoal.title}
@@ -144,7 +146,7 @@ const GoalCard: React.FC<{
             <div style={styles.progressContainer}>
                  <div style={styles.progressBarLabel}>
                     <label style={styles.label}>Progress</label>
-                    <span style={{color: 'var(--secondary-color)', fontWeight: 600, fontSize: '0.9rem'}}>{Math.round(progress)}%</span>
+                    <span style={{color: 'var(--secondary-color)', fontWeight: 600, fontSize: '0.7rem'}}>{Math.round(progress)}%</span>
                 </div>
                 <div style={styles.progressBar}>
                     <div style={{...styles.progressBarFill, width: `${progress}%`}} />
@@ -195,11 +197,11 @@ const GoalModal: React.FC<{
             <div style={styles.modalContainer} onClick={(e) => e.stopPropagation()}>
                 <header style={{...styles.header, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start'}}>
                     <div>
-                        <h1 style={{...styles.h1, fontSize: '2rem'}}>{goal ? 'Edit Goal' : 'Add New Goal'}</h1>
+                        <h1 style={{...styles.h1, fontSize: '1.35rem'}}>{goal ? 'Edit Goal' : 'Add New Goal'}</h1>
                         <p style={styles.p}>{goal ? 'Update the details for your goal.' : 'Define a new goal to work towards.'}</p>
                     </div>
                     <button onClick={onClose} style={{...styles.navButton, color: 'var(--text-secondary)', background: 'none', border: 'none', backdropFilter: 'none'}} aria-label="Close goal form">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                     </button>
                 </header>
                 <form style={styles.form} onSubmit={handleSubmit}>
@@ -222,7 +224,7 @@ const GoalModal: React.FC<{
                             )) : <p style={styles.p}>No tasks available to link.</p>}
                         </ul>
                     </div>
-                    <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid var(--border-color)' }}>
+                    <div style={{ display: 'flex', gap: '0.65rem', marginTop: '0.65rem', paddingTop: '0.65rem', borderTop: '1px solid var(--border-color)' }}>
                          {goal && (
                            <button type="button" onClick={() => onDelete(goal.id)} style={{...styles.button, ...styles.dangerButtonLarge, marginRight: 'auto'}}>
                                 Delete Goal
@@ -310,10 +312,10 @@ const TaskDetailModal: React.FC<{
       <div style={styles.modalContainer} onClick={(e) => e.stopPropagation()}>
         <header style={{...styles.header, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start'}}>
             <div>
-                <h1 style={{...styles.h1, fontSize: '2rem'}}>Task Details</h1>
+                <h1 style={{...styles.h1, fontSize: '1.35rem'}}>Task Details</h1>
             </div>
             <button onClick={onClose} style={{...styles.navButton, color: 'var(--text-secondary)', background: 'none', border: 'none', backdropFilter: 'none'}} aria-label="Close task details">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
         </header>
         <div style={styles.form}>
@@ -323,7 +325,7 @@ const TaskDetailModal: React.FC<{
               value={editedTask.content}
               onChange={(e) => setEditedTask(prev => ({ ...prev, content: e.target.value }))}
             />
-            <div style={{display: 'flex', gap: '1rem'}}>
+            <div style={{display: 'flex', gap: '0.65rem'}}>
                  <select
                     style={{...styles.input, ...styles.select}}
                     value={editedTask.skillId || ''}
@@ -351,10 +353,10 @@ const TaskDetailModal: React.FC<{
             <div>
                 <label style={styles.label}>Subtasks</label>
                 {(editedTask.subtasks && editedTask.subtasks.length > 0) && (
-                     <div style={{...styles.progressContainer, marginBottom: '1rem'}}>
+                     <div style={{...styles.progressContainer, marginBottom: '0.65rem'}}>
                          <div style={styles.progressBarLabel}>
                             <label style={{...styles.label, marginBottom: 0}}>Progress</label>
-                            <span style={{color: 'var(--secondary-color)', fontWeight: 600, fontSize: '0.9rem'}}>{Math.round(subtaskProgress)}%</span>
+                            <span style={{color: 'var(--secondary-color)', fontWeight: 600, fontSize: '0.7rem'}}>{Math.round(subtaskProgress)}%</span>
                         </div>
                         <div style={styles.progressBar}>
                             <div style={{...styles.progressBarFill, width: `${subtaskProgress}%`}} />
@@ -372,13 +374,13 @@ const TaskDetailModal: React.FC<{
                         </li>
                     ))}
                 </ul>
-                <form onSubmit={handleSubtaskAdd} style={{display: 'flex', gap: '0.5rem', marginTop: '1rem'}}>
-                    <input type="text" style={{...styles.input, padding: '0.75rem 1rem'}} placeholder="+ Add a subtask" value={newSubtaskContent} onChange={(e) => setNewSubtaskContent(e.target.value)} />
-                    <button type="submit" style={{...styles.button, width: 'auto', padding: '0.75rem 1.25rem'}}>+</button>
+                <form onSubmit={handleSubtaskAdd} style={{display: 'flex', gap: '0.35rem', marginTop: '0.65rem'}}>
+                    <input type="text" style={{...styles.input, padding: '0.35rem 0.45rem'}} placeholder="+ Add a subtask" value={newSubtaskContent} onChange={(e) => setNewSubtaskContent(e.target.value)} />
+                    <button type="submit" style={{...styles.button, width: 'auto', padding: '0.35rem 0.6rem'}}>+</button>
                 </form>
             </div>
             
-            <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid var(--border-color)' }}>
+            <div style={{ display: 'flex', gap: '0.65rem', marginTop: '0.65rem', paddingTop: '0.65rem', borderTop: '1px solid var(--border-color)' }}>
                 <button type="button" onClick={handleDelete} style={{...styles.button, ...styles.dangerButtonLarge, marginRight: 'auto'}}>Delete Task</button>
                 <button type="button" onClick={onClose} style={{ ...styles.button, backgroundColor: 'rgba(255,255,255,0.1)', color: 'var(--text-primary)'}}>Cancel</button>
                 <button type="button" onClick={handleSave} style={{...styles.button}} >Save Changes</button>
@@ -406,8 +408,9 @@ export const ActionCenter: React.FC<{
   onAddGoal: (goalData: Omit<Goal, 'id'>, linkedTaskIds: string[]) => void;
   onUpdateGoal: (goalId: string, goalData: Omit<Goal, 'id'>, linkedTaskIds: string[]) => void;
   onDeleteGoal: (goalId: string) => void;
+  onAddGoalToMap: (title: string, description: string) => void;
 }> = (props) => {
-  const { tasks, skills, goals, nodes, onAddTask, onDeleteTask, onAddTaskToMap, onUpdateTask, onUpdateTaskStatus, draggingTaskId, setDraggingTaskId, setActiveTab, onAddGoal, onUpdateGoal, onDeleteGoal } = props;
+  const { tasks, skills, goals, nodes, onAddTask, onDeleteTask, onAddTaskToMap, onUpdateTask, onUpdateTaskStatus, draggingTaskId, setDraggingTaskId, setActiveTab, onAddGoal, onUpdateGoal, onDeleteGoal, onAddGoalToMap } = props;
   const [actionView, setActionView] = useState<ActionView>('tasks');
   const [selectedGoalId, setSelectedGoalId] = useState<string | null>(null);
   const [isAddGoalModalOpen, setIsAddGoalModalOpen] = useState(false);
@@ -416,6 +419,8 @@ export const ActionCenter: React.FC<{
   const [newTaskContent, setNewTaskContent] = useState('');
   const [newTaskSkillId, setNewTaskSkillId] = useState('');
   const [newTaskGoalId, setNewTaskGoalId] = useState('');
+  const [showShareGoalModal, setShowShareGoalModal] = useState(false);
+  const [pendingGoal, setPendingGoal] = useState<{goalData: Omit<Goal, 'id'>, linkedTaskIds: string[]} | null>(null);
   
   const statuses: TaskStatus[] = ['To Do', 'Done'];
 
@@ -436,11 +441,25 @@ export const ActionCenter: React.FC<{
   const handleSaveGoal = (goalData: Omit<Goal, 'id'>, linkedTaskIds: string[]) => {
       if (selectedGoalId) {
           onUpdateGoal(selectedGoalId, goalData, linkedTaskIds);
+          setSelectedGoalId(null);
+          setIsAddGoalModalOpen(false);
       } else {
-          onAddGoal(goalData, linkedTaskIds);
+          // Show modal to ask if user wants to share on map
+          setPendingGoal({goalData, linkedTaskIds});
+          setShowShareGoalModal(true);
+          setIsAddGoalModalOpen(false);
       }
-      setSelectedGoalId(null);
-      setIsAddGoalModalOpen(false);
+  };
+  
+  const handleShareGoalDecision = (shareOnMap: boolean) => {
+      if (pendingGoal) {
+          onAddGoal(pendingGoal.goalData, pendingGoal.linkedTaskIds);
+          if (shareOnMap) {
+              onAddGoalToMap(pendingGoal.goalData.title, pendingGoal.goalData.description);
+          }
+      }
+      setShowShareGoalModal(false);
+      setPendingGoal(null);
   };
   
   const handleDeleteGoal = (goalId: string) => {
@@ -477,9 +496,9 @@ export const ActionCenter: React.FC<{
         }
       `}</style>
       <div style={styles.actionCenterContainer}>
-       <header style={{...styles.header, marginBottom: '2rem', paddingTop: '0', marginTop: '0'}}>
-            <h1 style={{...styles.h1, display: 'flex', alignItems: 'center', gap: '0.75rem'}}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{color: 'var(--primary-color)'}}>
+       <header style={{...styles.header, marginBottom: '1.35rem', paddingTop: '0', marginTop: '0'}}>
+            <h1 style={{...styles.h1, display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{color: 'var(--primary-color)'}}>
                 <circle cx="12" cy="12" r="3"></circle>
                 <path d="M12 1v6m0 6v6m5.2-14.8L13 8.4m-2 7.2-4.2 4.2M1 12h6m6 0h6M4.2 4.2 8.4 8.4m7.2 2 4.2 4.2M1 12h6m6 0h6M4.2 19.8 8.4 15.6m7.2-2 4.2-4.2"></path>
               </svg>
@@ -490,10 +509,10 @@ export const ActionCenter: React.FC<{
 
         <div style={{ 
           display: 'flex', 
-          gap: '0.5rem', 
-          marginBottom: '2rem',
+          gap: '0.35rem', 
+          marginBottom: '1.35rem',
           borderBottom: '1px solid var(--border-color)',
-          paddingBottom: '0.5rem',
+          paddingBottom: '0.35rem',
           marginLeft: '0',
         }}>
             <button 
@@ -501,10 +520,10 @@ export const ActionCenter: React.FC<{
                 style={{
                   backgroundColor: actionView === 'tasks' ? 'rgba(99, 102, 241, 0.15)' : 'transparent',
                   border: 'none',
-                  borderRadius: '8px',
+                  borderRadius: '5px',
                   color: actionView === 'tasks' ? '#6366f1' : 'var(--text-secondary)',
-                  padding: '0.75rem 1.5rem',
-                  fontSize: '0.95rem',
+                  padding: '0.5rem 1rem',
+                  fontSize: '0.65rem',
                   fontWeight: 600,
                   cursor: 'pointer',
                   transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -520,7 +539,7 @@ export const ActionCenter: React.FC<{
                   }
                 }}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ verticalAlign: 'middle', marginRight: '0.5rem' }}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ verticalAlign: 'middle', marginRight: '0.35rem' }}>
                 <polyline points="9 11 12 14 22 4"></polyline>
                 <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
               </svg>
@@ -531,10 +550,10 @@ export const ActionCenter: React.FC<{
                 style={{
                   backgroundColor: actionView === 'goals' ? 'rgba(99, 102, 241, 0.15)' : 'transparent',
                   border: 'none',
-                  borderRadius: '8px',
+                  borderRadius: '5px',
                   color: actionView === 'goals' ? '#6366f1' : 'var(--text-secondary)',
-                  padding: '0.75rem 1.5rem',
-                  fontSize: '0.95rem',
+                  padding: '0.5rem 1rem',
+                  fontSize: '0.65rem',
                   fontWeight: 600,
                   cursor: 'pointer',
                   transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -550,7 +569,7 @@ export const ActionCenter: React.FC<{
                   }
                 }}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ verticalAlign: 'middle', marginRight: '0.5rem' }}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ verticalAlign: 'middle', marginRight: '0.35rem' }}>
                 <circle cx="12" cy="12" r="10"></circle>
                 <circle cx="12" cy="12" r="6"></circle>
                 <circle cx="12" cy="12" r="2"></circle>
@@ -585,7 +604,7 @@ export const ActionCenter: React.FC<{
                     <div key={status} style={{...styles.taskColumn}}>
                       <div style={styles.taskColumnHeader}>
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                             <span style={{ ...styles.taskColumnDot, backgroundColor: taskStatusColors[status].dot }}></span>
                             <h3 style={styles.taskColumnTitle}>{status}</h3>
                             <span style={styles.taskCount}>{statusTasks.length}</span>
@@ -596,8 +615,8 @@ export const ActionCenter: React.FC<{
                               style={{
                                 ...styles.button, 
                                 width: 'auto',
-                                padding: '0.5rem 1rem',
-                                fontSize: '0.85rem',
+                                padding: '0.35rem 0.65rem',
+                                fontSize: '0.6rem',
                                 backgroundColor: 'rgba(255, 255, 255, 0.05)',
                                 border: '1px dashed var(--border-color)',
                                 color: 'var(--text-secondary)',
@@ -612,14 +631,14 @@ export const ActionCenter: React.FC<{
                       
                       {/* Add Task Form below header */}
                       {isAddingTask === status && (
-                        <div style={{marginBottom: '1rem'}}>
+                        <div style={{marginBottom: '0.65rem'}}>
                           <form onSubmit={(e) => handleAddNewTask(e, status)} style={{
                             display: 'flex',
                             flexDirection: 'column',
-                            gap: '0.75rem',
-                            padding: '1rem',
+                            gap: '0.5rem',
+                            padding: '0.65rem',
                             backgroundColor: 'rgba(255, 255, 255, 0.03)',
-                            borderRadius: '12px',
+                            borderRadius: '8px',
                             border: '1px solid var(--border-color)',
                           }}>
                             <input
@@ -630,7 +649,7 @@ export const ActionCenter: React.FC<{
                               onChange={(e) => setNewTaskContent(e.target.value)}
                               autoFocus
                             />
-                            <div style={{display: 'flex', gap: '0.75rem'}}>
+                            <div style={{display: 'flex', gap: '0.5rem'}}>
                               <select
                                 style={{...styles.input, ...styles.select, flex: 1}}
                                 value={newTaskSkillId}
@@ -652,7 +671,7 @@ export const ActionCenter: React.FC<{
                                 ))}
                               </select>
                             </div>
-                            <div style={{display: 'flex', gap: '0.75rem', justifyContent: 'flex-end'}}>
+                            <div style={{display: 'flex', gap: '0.5rem', justifyContent: 'flex-end'}}>
                               <button 
                                 type="button"
                                 style={{...styles.button, backgroundColor: 'rgba(255,255,255,0.1)', color: 'var(--text-primary)', width: 'auto'}}
@@ -679,7 +698,7 @@ export const ActionCenter: React.FC<{
                       
                       <div 
                         className="task-cards-container" 
-                        style={{...styles.taskCardsContainer, gap: '1.5rem'}}
+                        style={{...styles.taskCardsContainer, gap: '1rem'}}
                         onDragOver={(e) => e.preventDefault()}
                         onDrop={(e) => {
                           e.preventDefault();
@@ -700,10 +719,10 @@ export const ActionCenter: React.FC<{
                                   display: 'flex',
                                   alignItems: 'center',
                                   gap: '0.5rem',
-                                  padding: '0.5rem 0',
+                                  padding: '0.35rem 0',
                                   borderBottom: '1px solid rgba(255, 159, 10, 0.2)',
                                   color: 'var(--text-secondary)',
-                                  fontSize: '0.85rem',
+                                  fontSize: '0.6rem',
                                   fontWeight: 600,
                                 }}>
                                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FF9500" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -712,7 +731,7 @@ export const ActionCenter: React.FC<{
                                     <circle cx="12" cy="12" r="2"></circle>
                                   </svg>
                                   <span style={{color: '#FF9500'}}>{goal.title}</span>
-                                  <span style={{marginLeft: 'auto', color: 'var(--text-tertiary)', fontSize: '0.8rem'}}>
+                                  <span style={{marginLeft: 'auto', color: 'var(--text-tertiary)', fontSize: '0.55rem'}}>
                                     {groupTasks.length} {groupTasks.length === 1 ? 'task' : 'tasks'}
                                   </span>
                                 </div>
@@ -797,6 +816,37 @@ export const ActionCenter: React.FC<{
                 onUpdateTask={handleTaskDetailSave}
                 onDeleteTask={onDeleteTask}
             />
+        )}
+        {showShareGoalModal && (
+            <div style={styles.modalOverlay} onClick={() => {setShowShareGoalModal(false); setPendingGoal(null);}}>
+                <div style={{...styles.modalContainer, maxWidth: '500px'}} onClick={(e) => e.stopPropagation()}>
+                    <h2 style={{...styles.nodeTitle, marginBottom: '0.65rem'}}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{color: 'var(--primary-color)'}}>
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <circle cx="12" cy="12" r="6"></circle>
+                            <circle cx="12" cy="12" r="2"></circle>
+                        </svg>
+                        Share Goal on Mind Map?
+                    </h2>
+                    <p style={{fontSize: '0.7rem', color: 'var(--text-secondary)', marginBottom: '1.35rem', lineHeight: 1.6}}>
+                        Would you like to add this goal to your Mind Map for better visualization and connection with other ideas?
+                    </p>
+                    <div style={{display: 'flex', gap: '0.65rem'}}>
+                        <button 
+                            onClick={() => handleShareGoalDecision(false)}
+                            style={{...styles.button, flex: 1, backgroundColor: 'rgba(255,255,255,0.05)'}}
+                        >
+                            No, Keep Private
+                        </button>
+                        <button 
+                            onClick={() => handleShareGoalDecision(true)}
+                            style={{...styles.button, flex: 1}}
+                        >
+                            Yes, Share on Map
+                        </button>
+                    </div>
+                </div>
+            </div>
         )}
     </div>
     </>

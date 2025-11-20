@@ -98,12 +98,12 @@ export const CalendarView: React.FC = () => {
       display: 'flex', 
       flexDirection: 'column', 
       height: '100%', 
-      padding: '0 2rem 2rem 2rem',
+      padding: '0 1.35rem 1.35rem 1.35rem',
       overflowY: 'auto',
     }}>
-      <header style={{...styles.header, marginBottom: '2rem', paddingTop: '0', marginTop: '0'}}>
-        <h1 style={{...styles.h1, display: 'flex', alignItems: 'center', gap: '0.75rem'}}>
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{color: 'var(--primary-color)'}}>
+      <header style={{...styles.header, marginBottom: '1.35rem', paddingTop: '0', marginTop: '0'}}>
+        <h1 style={{...styles.h1, display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{color: 'var(--primary-color)'}}>
             <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
             <line x1="16" y1="2" x2="16" y2="6"></line>
             <line x1="8" y1="2" x2="8" y2="6"></line>
@@ -119,17 +119,17 @@ export const CalendarView: React.FC = () => {
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom: '2rem',
+        marginBottom: '1.35rem',
       }}>
-        <div style={{ display: 'flex', gap: '0.5rem' }}>
+        <div style={{ display: 'flex', gap: '0.35rem' }}>
           <button
             onClick={goToPreviousMonth}
             style={{
               backgroundColor: 'rgba(255,255,255,0.05)',
               border: '1px solid var(--border-color)',
-              borderRadius: '8px',
+              borderRadius: '6px',
               color: 'var(--text-primary)',
-              padding: '0.5rem 1rem',
+              padding: '0.35rem 0.65rem',
               cursor: 'pointer',
               transition: 'all 0.2s ease',
               fontWeight: 500,
@@ -141,7 +141,7 @@ export const CalendarView: React.FC = () => {
               e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.05)';
             }}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
           </button>
@@ -150,9 +150,9 @@ export const CalendarView: React.FC = () => {
             style={{
               backgroundColor: 'rgba(255,255,255,0.05)',
               border: '1px solid var(--border-color)',
-              borderRadius: '8px',
+              borderRadius: '6px',
               color: 'var(--text-primary)',
-              padding: '0.5rem 1rem',
+              padding: '0.35rem 0.65rem',
               cursor: 'pointer',
               transition: 'all 0.2s ease',
               fontWeight: 500,
@@ -164,14 +164,14 @@ export const CalendarView: React.FC = () => {
               e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.05)';
             }}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="9 18 15 12 9 6"></polyline>
             </svg>
           </button>
         </div>
 
         <h2 style={{
-          fontSize: '1.5rem',
+          fontSize: '1rem',
           fontWeight: 600,
           color: 'var(--text-primary)',
           margin: 0,
@@ -184,37 +184,37 @@ export const CalendarView: React.FC = () => {
           style={{
             ...styles.button,
             width: 'auto',
-            padding: '0.5rem 1.5rem',
+            padding: '0.35rem 1rem',
           }}
         >
           Today
         </button>
       </div>
 
-      <div style={{ display: 'flex', gap: '2rem', flex: 1, minHeight: 0 }}>
+      <div style={{ display: 'flex', gap: '1.35rem', flex: 1, minHeight: 0 }}>
         {/* Calendar Grid */}
         <div style={{ flex: selectedDate ? '0 0 60%' : '1', transition: 'flex 0.3s ease' }}>
           <div style={{
             backgroundColor: 'rgba(255,255,255,0.03)',
             border: '1px solid var(--border-color)',
-            borderRadius: '16px',
-            padding: '1.5rem',
+            borderRadius: '10px',
+            padding: '1rem',
             height: '100%',
           }}>
             {/* Weekday Headers */}
             <div style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(7, 1fr)',
-              gap: '0.5rem',
-              marginBottom: '1rem',
+              gap: '0.35rem',
+              marginBottom: '0.65rem',
             }}>
               {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
                 <div key={day} style={{
                   textAlign: 'center',
-                  fontSize: '0.85rem',
+                  fontSize: '0.65rem',
                   fontWeight: 600,
                   color: 'var(--text-secondary)',
-                  padding: '0.5rem',
+                  padding: '0.35rem',
                 }}>
                   {day}
                 </div>
@@ -225,7 +225,7 @@ export const CalendarView: React.FC = () => {
             <div style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(7, 1fr)',
-              gap: '0.5rem',
+              gap: '0.35rem',
             }}>
               {calendarDays.map((date, index) => {
                 if (!date) {

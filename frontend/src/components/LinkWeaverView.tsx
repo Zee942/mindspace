@@ -40,13 +40,13 @@ export const LinkWeaverView: React.FC<LinkWeaverViewProps> = ({ nodes, onAddNode
   };
 
   return (
-    <div style={{ paddingLeft: '4rem', paddingRight: '2rem', paddingTop: 0, paddingBottom: 0, display: 'flex', flexDirection: 'column', height: '100vh' }}>
-      <header style={{...styles.header, marginTop: 0, paddingTop: 0, marginBottom: '2rem', textAlign: 'left' }}>
-        <h1 style={{...styles.h1, display: 'flex', alignItems: 'center', gap: '0.75rem'}}>
+    <div style={{ paddingLeft: '2.65rem', paddingRight: '1.35rem', paddingTop: 0, paddingBottom: 0, display: 'flex', flexDirection: 'column', height: '100vh' }}>
+      <header style={{...styles.header, marginTop: 0, paddingTop: 0, marginBottom: '1.35rem', textAlign: 'left' }}>
+        <h1 style={{...styles.h1, display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
-            width="32" 
-            height="32" 
+            width="22" 
+            height="22" 
             viewBox="0 0 24 24" 
             fill="none" 
             stroke="currentColor" 
@@ -65,23 +65,23 @@ export const LinkWeaverView: React.FC<LinkWeaverViewProps> = ({ nodes, onAddNode
 
       {/* URL Input Form */}
       <div style={{
-        width: '700px',
+        width: '470px',
         backgroundColor: 'rgba(255,255,255,0.03)',
         border: '1px solid var(--border-color)',
-        borderRadius: '16px',
-        padding: '2rem',
-        marginTop: '2rem',
+        borderRadius: '10px',
+        padding: '1.35rem',
+        marginTop: '1.35rem',
       }}>
-        <h2 style={{ ...styles.nodeTitle, marginBottom: '1.5rem' }}>Add New Link</h2>
+        <h2 style={{ ...styles.nodeTitle, marginBottom: '1rem' }}>Add New Link</h2>
         <form onSubmit={handleSubmit}>
-          <div style={{ marginBottom: '1.5rem' }}>
+          <div style={{ marginBottom: '1rem' }}>
             <label 
               htmlFor="url" 
               style={{ 
                 display: 'block', 
-                marginBottom: '0.5rem',
+                marginBottom: '0.35rem',
                 color: 'var(--text-secondary)',
-                fontSize: '0.9rem',
+                fontSize: '0.7rem',
                 fontWeight: 500
               }}
             >
@@ -96,25 +96,25 @@ export const LinkWeaverView: React.FC<LinkWeaverViewProps> = ({ nodes, onAddNode
               style={{
                 ...styles.input,
                 width: '100%',
-                fontSize: '1rem',
+                fontSize: '0.75rem',
               }}
               required
             />
             {url && !isValidUrl(url) && (
-              <p style={{ color: '#ef4444', fontSize: '0.85rem', marginTop: '0.5rem' }}>
+              <p style={{ color: '#ef4444', fontSize: '0.65rem', marginTop: '0.35rem' }}>
                 Please enter a valid URL
               </p>
             )}
           </div>
 
-          <div style={{ marginBottom: '1.5rem' }}>
+          <div style={{ marginBottom: '1rem' }}>
             <label 
               htmlFor="title" 
               style={{ 
                 display: 'block', 
-                marginBottom: '0.5rem',
+                marginBottom: '0.35rem',
                 color: 'var(--text-secondary)',
-                fontSize: '0.9rem',
+                fontSize: '0.7rem',
                 fontWeight: 500
               }}
             >
@@ -129,20 +129,20 @@ export const LinkWeaverView: React.FC<LinkWeaverViewProps> = ({ nodes, onAddNode
               style={{
                 ...styles.input,
                 width: '100%',
-                fontSize: '1rem',
+                fontSize: '0.75rem',
               }}
               required
             />
           </div>
 
-          <div style={{ marginBottom: '1.5rem' }}>
+          <div style={{ marginBottom: '1rem' }}>
             <label 
               htmlFor="summary" 
               style={{ 
                 display: 'block', 
-                marginBottom: '0.5rem',
+                marginBottom: '0.35rem',
                 color: 'var(--text-secondary)',
-                fontSize: '0.9rem',
+                fontSize: '0.7rem',
                 fontWeight: 500
               }}
             >
@@ -156,7 +156,7 @@ export const LinkWeaverView: React.FC<LinkWeaverViewProps> = ({ nodes, onAddNode
               style={{
                 ...styles.textarea,
                 width: '100%',
-                minHeight: '100px',
+                minHeight: '67px',
                 resize: 'vertical',
                 fontFamily: 'inherit',
               }}
@@ -170,21 +170,21 @@ export const LinkWeaverView: React.FC<LinkWeaverViewProps> = ({ nodes, onAddNode
               ...styles.futuristicButton,
               ...styles.futuristicPrimary,
               width: '100%',
-              fontSize: '1rem',
+              fontSize: '0.75rem',
               ...(!url.trim() || !title.trim() || !isValidUrl(url) ? { opacity: 0.5, cursor: 'not-allowed' } : {}),
             }}
           >
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
-              width="20" 
-              height="20" 
+              width="14" 
+              height="14" 
               viewBox="0 0 24 24" 
               fill="none" 
               stroke="currentColor" 
               strokeWidth="2" 
               strokeLinecap="round" 
               strokeLinejoin="round"
-              style={{ marginRight: '0.5rem', verticalAlign: 'middle' }}
+              style={{ marginRight: '0.35rem', verticalAlign: 'middle' }}
             >
               <line x1="12" y1="5" x2="12" y2="19"></line>
               <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -197,24 +197,24 @@ export const LinkWeaverView: React.FC<LinkWeaverViewProps> = ({ nodes, onAddNode
       {/* Link Nodes List - Fixed Right Side */}
       <div style={{
         position: 'fixed',
-        right: '2rem',
-        top: '6rem',
-        bottom: '2rem',
-        width: '400px',
+        right: '1.35rem',
+        top: '4rem',
+        bottom: '1.35rem',
+        width: '270px',
         display: 'flex',
         flexDirection: 'column',
       }}>
         {linkNodes.length > 0 ? (
           <>
-            <h2 style={{ ...styles.nodeTitle, marginBottom: '1.5rem', flexShrink: 0 }}>
+            <h2 style={{ ...styles.nodeTitle, marginBottom: '1rem', flexShrink: 0 }}>
               Your Link Nodes ({linkNodes.length})
             </h2>
             <div style={{
               display: 'flex',
               flexDirection: 'column',
-              gap: '1rem',
+              gap: '0.65rem',
               overflowY: 'auto',
-              paddingRight: '0.5rem',
+              paddingRight: '0.35rem',
               flex: 1,
             }}>
             {linkNodes.map((node) => (
@@ -223,14 +223,14 @@ export const LinkWeaverView: React.FC<LinkWeaverViewProps> = ({ nodes, onAddNode
                 style={{
                   backgroundColor: 'rgba(255,255,255,0.03)',
                   border: '1px solid var(--border-color)',
-                  borderRadius: '12px',
-                  padding: '1.25rem 1.5rem',
+                  borderRadius: '8px',
+                  padding: '0.85rem 1rem',
                   cursor: 'pointer',
                   transition: 'all 0.3s ease',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  gap: '1.5rem',
+                  gap: '1rem',
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.05)';
@@ -244,8 +244,8 @@ export const LinkWeaverView: React.FC<LinkWeaverViewProps> = ({ nodes, onAddNode
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <h3 style={{
                     ...styles.nodeTitle,
-                    fontSize: '1rem',
-                    marginBottom: node.summary ? '0.5rem' : '0',
+                    fontSize: '0.75rem',
+                    marginBottom: node.summary ? '0.35rem' : '0',
                     color: 'var(--text-primary)',
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
@@ -257,7 +257,7 @@ export const LinkWeaverView: React.FC<LinkWeaverViewProps> = ({ nodes, onAddNode
                   {node.summary && (
                     <p style={{
                       ...styles.p,
-                      fontSize: '0.85rem',
+                      fontSize: '0.65rem',
                       margin: 0,
                       color: 'var(--text-secondary)',
                       display: '-webkit-box',
@@ -278,13 +278,13 @@ export const LinkWeaverView: React.FC<LinkWeaverViewProps> = ({ nodes, onAddNode
                     style={{
                       display: 'inline-flex',
                       alignItems: 'center',
-                      gap: '0.5rem',
+                      gap: '0.35rem',
                       color: '#6366f1',
                       textDecoration: 'none',
-                      fontSize: '0.85rem',
+                      fontSize: '0.65rem',
                       flexShrink: 0,
-                      padding: '0.5rem 1rem',
-                      borderRadius: '8px',
+                      padding: '0.35rem 0.65rem',
+                      borderRadius: '6px',
                       backgroundColor: 'rgba(99, 102, 241, 0.1)',
                       transition: 'all 0.2s ease',
                       whiteSpace: 'nowrap',
@@ -301,8 +301,8 @@ export const LinkWeaverView: React.FC<LinkWeaverViewProps> = ({ nodes, onAddNode
                   >
                     <svg 
                       xmlns="http://www.w3.org/2000/svg" 
-                      width="16" 
-                      height="16" 
+                      width="11" 
+                      height="11" 
                       viewBox="0 0 24 24" 
                       fill="none" 
                       stroke="currentColor" 
@@ -325,14 +325,14 @@ export const LinkWeaverView: React.FC<LinkWeaverViewProps> = ({ nodes, onAddNode
           <div style={{
             backgroundColor: 'rgba(255,255,255,0.03)',
             border: '1px solid var(--border-color)',
-            borderRadius: '16px',
-            padding: '3rem',
+            borderRadius: '10px',
+            padding: '2rem',
             textAlign: 'center',
           }}>
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
-              width="64" 
-              height="64" 
+              width="43" 
+              height="43" 
               viewBox="0 0 24 24" 
               fill="none" 
               stroke="currentColor" 
@@ -340,7 +340,7 @@ export const LinkWeaverView: React.FC<LinkWeaverViewProps> = ({ nodes, onAddNode
               strokeLinecap="round" 
               strokeLinejoin="round"
               style={{ 
-                margin: '0 auto 1.5rem',
+                margin: '0 auto 1rem',
                 opacity: 0.3,
                 color: 'var(--text-secondary)',
               }}
@@ -348,7 +348,7 @@ export const LinkWeaverView: React.FC<LinkWeaverViewProps> = ({ nodes, onAddNode
               <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
               <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
             </svg>
-            <h3 style={{ ...styles.nodeTitle, marginBottom: '0.75rem', opacity: 0.6 }}>
+            <h3 style={{ ...styles.nodeTitle, marginBottom: '0.5rem', opacity: 0.6 }}>
               No link nodes yet
             </h3>
             <p style={{ ...styles.p, opacity: 0.5 }}>

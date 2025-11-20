@@ -141,20 +141,20 @@ export const Dashboard: React.FC<DashboardProps> = ({
     return allTransactions.slice(0, 6);
   }, [income, expenses, investments]);
 
-  return (
+    return (
     <div style={styles.dashboardContainer}>
-      <header style={{ ...styles.header, marginBottom: '1.5rem' }}>
-        <h1 style={{ ...styles.h1, marginTop: 0, marginBottom: '0.5rem' }}>Dashboard</h1>
+      <header style={{ ...styles.header, marginBottom: '1rem' }}>
+        <h1 style={{ ...styles.h1, marginTop: 0, marginBottom: '0.35rem' }}>Dashboard</h1>
         <p style={styles.p}>A high-level overview of your Mind Space.</p>
       </header>
 
       {/* Tab Navigation */}
       <div style={{ 
         display: 'flex', 
-        gap: '0.5rem', 
-        marginBottom: '2rem',
+        gap: '0.35rem', 
+        marginBottom: '1.35rem',
         borderBottom: '1px solid var(--border-color)',
-        paddingBottom: '0.5rem',
+        paddingBottom: '0.35rem',
         marginLeft: '0',
       }}>
         <button
@@ -162,10 +162,10 @@ export const Dashboard: React.FC<DashboardProps> = ({
           style={{
             backgroundColor: activeView === 'overview' ? 'rgba(99, 102, 241, 0.15)' : 'transparent',
             border: 'none',
-            borderRadius: '8px',
+            borderRadius: '6px',
             color: activeView === 'overview' ? '#6366f1' : 'var(--text-secondary)',
-            padding: '0.75rem 1.5rem',
-            fontSize: '0.95rem',
+            padding: '0.5rem 1rem',
+            fontSize: '0.7rem',
             fontWeight: 600,
             cursor: 'pointer',
             transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -194,10 +194,10 @@ export const Dashboard: React.FC<DashboardProps> = ({
           style={{
             backgroundColor: activeView === 'finance' ? 'rgba(99, 102, 241, 0.15)' : 'transparent',
             border: 'none',
-            borderRadius: '8px',
+            borderRadius: '6px',
             color: activeView === 'finance' ? '#6366f1' : 'var(--text-secondary)',
-            padding: '0.75rem 1.5rem',
-            fontSize: '0.95rem',
+            padding: '0.5rem 1rem',
+            fontSize: '0.7rem',
             fontWeight: 600,
             cursor: 'pointer',
             transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -247,22 +247,22 @@ export const Dashboard: React.FC<DashboardProps> = ({
       </div>
       <div style={styles.insightsContainer}>
         <div style={styles.insightListContainer}>
-          <h3 style={{ ...styles.nodeTitle, fontSize: '1.5rem' }}>Orphan Nodes</h3>
-          <p style={{ ...styles.p, marginTop: '-0.5rem', marginBottom: '1.5rem' }}>
+          <h3 style={{ ...styles.nodeTitle, fontSize: '0.8rem' }}>Orphan Nodes</h3>
+          <p style={{ ...styles.p, marginTop: '-0.5rem', marginBottom: '1.5rem', fontSize: '0.6rem' }}>
             Nodes that are not connected to anything.
           </p>
           {orphanNodes.length > 0 ? (
             <ul style={styles.insightList}>
               {orphanNodes.map(node => (
                 <li key={node.id} style={styles.insightListItem}>
-                  <span>{node.title}</span>
+                  <span style={{ fontSize: '0.65rem' }}>{node.title}</span>
                   <button
                     onClick={() => handleNodeClick(node.id)}
                     style={{
                       ...styles.button,
                       backgroundColor: 'var(--secondary-color)',
                       width: 'auto',
-                      fontSize: '0.8rem',
+                      fontSize: '0.55rem',
                       padding: '0.35rem 0.75rem',
                     }}
                   >
@@ -296,8 +296,8 @@ export const Dashboard: React.FC<DashboardProps> = ({
           )}
         </div>
         <div style={styles.insightListContainer}>
-          <h3 style={{ ...styles.nodeTitle, fontSize: '1.5rem' }}>Top Hubs</h3>
-          <p style={{ ...styles.p, marginTop: '-0.5rem', marginBottom: '1.5rem' }}>
+          <h3 style={{ ...styles.nodeTitle, fontSize: '0.8rem' }}>Top Hubs</h3>
+          <p style={{ ...styles.p, marginTop: '-0.5rem', marginBottom: '1.5rem', fontSize: '0.6rem' }}>
             Your most connected nodes.
           </p>
           {topHubs.length > 0 ? (
@@ -305,8 +305,8 @@ export const Dashboard: React.FC<DashboardProps> = ({
               {topHubs.map(({ node, count }) =>
                 node ? (
                   <li key={node.id} style={styles.insightListItem}>
-                    <span>{node.title}</span>
-                    <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
+                    <span style={{ fontSize: '0.65rem' }}>{node.title}</span>
+                    <span style={{ color: 'var(--text-secondary)', fontSize: '0.6rem' }}>
                       {count} connections
                     </span>
                   </li>

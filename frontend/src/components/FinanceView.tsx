@@ -10,12 +10,12 @@ const cardThemes: Record<string, React.CSSProperties> = {
   qnb: { background: 'linear-gradient(135deg, #1c3d7e, #0e1e3f)' },
   purple: {
     backgroundImage: `
-      radial-gradient(circle at 100% 100%, transparent 10px, #a066ff 10px, #a066ff 12px, transparent 12px),
+      radial-gradient(circle at 100% 100%, transparent 7px, #a066ff 7px, #a066ff 8px, transparent 8px),
       linear-gradient(to right, #a066ff, #5856d6),
-      radial-gradient(circle at 0% 100%, transparent 10px, #5856d6 10px, #5856d6 12px, transparent 12px),
+      radial-gradient(circle at 0% 100%, transparent 7px, #5856d6 7px, #5856d6 8px, transparent 8px),
       linear-gradient(to bottom, #5856d6, #5856d6)
     `,
-    backgroundSize: '12px 12px, calc(100% - 24px) 2px, 12px 12px, 2px calc(100% - 24px)',
+    backgroundSize: '8px 8px, calc(100% - 16px) 2px, 8px 8px, 2px calc(100% - 16px)',
     backgroundPosition: 'bottom left, top center, bottom right, left center',
     backgroundRepeat: 'no-repeat, no-repeat, no-repeat, no-repeat',
     backgroundColor: '#332352'
@@ -51,9 +51,9 @@ const AddCardModal: React.FC<{ onClose: () => void; onAdd: (cardData: Omit<Card,
   
     return (
       <div style={styles.modalOverlay} onClick={onClose}>
-        <div style={{...styles.modalContainer, maxWidth: '550px'}} onClick={(e) => e.stopPropagation()}>
+        <div style={{...styles.modalContainer, maxWidth: '370px'}} onClick={(e) => e.stopPropagation()}>
           <header>
-            <h1 style={{...styles.h1, fontSize: '2rem'}}>Add New Card</h1>
+            <h1 style={{...styles.h1, fontSize: '1.35rem'}}>Add New Card</h1>
             <p style={styles.p}>Enter the details for your new card.</p>
           </header>
           <form style={styles.form} onSubmit={handleSubmit}>
@@ -73,9 +73,57 @@ const AddCardModal: React.FC<{ onClose: () => void; onAdd: (cardData: Omit<Card,
                     ))}
                 </div>
             </div>
-            <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+            <div style={{ display: 'flex', gap: '0.65rem', marginTop: '0.65rem' }}>
                 <button type="button" onClick={onClose} style={{...styles.button, backgroundColor: 'rgba(255,255,255,0.1)', color: 'var(--text-primary)'}}>Cancel</button>
                 <button type="submit" style={styles.button}>Add Card</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    );
+};
+
+const EditCardModal: React.FC<{ onClose: () => void; onUpdate: (cardData: Omit<Card, 'id'>) => void; card: Card; }> = ({ onClose, onUpdate, card }) => {
+    const [nickname, setNickname] = useState(card.nickname);
+    const [bankName, setBankName] = useState(card.bank_name);
+    const [cardholderName, setCardholderName] = useState(card.cardholder_name);
+    const [limit, setLimit] = useState(card.limit.toString());
+    const [cardType, setCardType] = useState<'Debit' | 'Credit'>(card.card_type);
+    const [theme, setTheme] = useState(card.theme);
+  
+    const handleSubmit = (e: React.FormEvent) => {
+      e.preventDefault();
+      if (!nickname || !bankName || !cardholderName || !limit) return;
+      onUpdate({ nickname, bank_name: bankName, cardholder_name: cardholderName, limit: parseFloat(limit), card_type: cardType, theme });
+    };
+  
+    return (
+      <div style={styles.modalOverlay} onClick={onClose}>
+        <div style={{...styles.modalContainer, maxWidth: '370px'}} onClick={(e) => e.stopPropagation()}>
+          <header>
+            <h1 style={{...styles.h1, fontSize: '1.35rem'}}>Edit Card</h1>
+            <p style={styles.p}>Update your card details.</p>
+          </header>
+          <form style={styles.form} onSubmit={handleSubmit}>
+            <input type="text" style={styles.input} placeholder="Card Nickname" value={nickname} onChange={e => setNickname(e.target.value)} required />
+            <input type="text" style={styles.input} placeholder="Bank Name" value={bankName} onChange={e => setBankName(e.target.value)} required />
+            <input type="text" style={styles.input} placeholder="Cardholder Name" value={cardholderName} onChange={e => setCardholderName(e.target.value)} required />
+            <input type="number" style={styles.input} placeholder="Limit / Balance" value={limit} onChange={e => setLimit(e.target.value)} required />
+            <select style={styles.select} value={cardType} onChange={e => setCardType(e.target.value as any)}>
+              <option style={{ backgroundColor: '#2d2d30', color: '#ffffff' }}>Credit</option>
+              <option style={{ backgroundColor: '#2d2d30', color: '#ffffff' }}>Debit</option>
+            </select>
+            <div>
+                <label style={styles.label}>Card Theme</label>
+                <div style={styles.themePicker}>
+                    {Object.keys(cardThemes).map(themeKey => (
+                        <div key={themeKey} onClick={() => setTheme(themeKey)} style={{...styles.themeOption, ...cardThemes[themeKey], borderColor: theme === themeKey ? 'var(--primary-color)' : 'transparent'}} />
+                    ))}
+                </div>
+            </div>
+            <div style={{ display: 'flex', gap: '0.65rem', marginTop: '0.65rem' }}>
+                <button type="button" onClick={onClose} style={{...styles.button, backgroundColor: 'rgba(255,255,255,0.1)', color: 'var(--text-primary)'}}>Cancel</button>
+                <button type="submit" style={styles.button}>Update Card</button>
             </div>
           </form>
         </div>
@@ -121,8 +169,8 @@ const TransactionTable: React.FC<{
     return (
         <div style={styles.transactionTableContainer}>
             <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-                <h2 style={{...styles.h1, fontSize: '1.5rem', margin: 0}}>{title}</h2>
-                <button onClick={() => setShowForm(!showForm)} style={{...styles.button, width: 'auto', padding: '0.5rem 1rem', fontSize: '0.9rem'}}>
+                <h2 style={{...styles.h1, fontSize: '1rem', margin: 0}}>{title}</h2>
+                <button onClick={() => setShowForm(!showForm)} style={{...styles.button, width: 'auto', padding: '0.35rem 0.65rem', fontSize: '0.7rem'}}>
                     {showForm ? 'Cancel' : '+ New'}
                 </button>
             </div>
@@ -186,13 +234,13 @@ const TransactionTable: React.FC<{
                             style={{...styles.taskCardActionButton, color: 'var(--danger-color)'}}
                             aria-label={`Delete ${entry.source}`}
                         >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
                         </button>
                     </div>
                 ))}
-                 <div style={{...styles.transactionRow, borderBottom: 'none', marginTop: '0.5rem'}}>
+                 <div style={{...styles.transactionRow, borderBottom: 'none', marginTop: '0.35rem'}}>
                     <span style={{...styles.transactionRowHeader}}>SUM</span>
-                    <span style={{...styles.transactionRowHeader, textAlign: 'right', fontSize: '1rem'}}>{formatCurrency(totalAmount)}</span>
+                    <span style={{...styles.transactionRowHeader, textAlign: 'right', fontSize: '0.75rem'}}>{formatCurrency(totalAmount)}</span>
                     <span></span>
                     <span></span>
                     <span></span>
@@ -211,19 +259,20 @@ export const FinanceView: React.FC<{
   onAddExpense: (entry: Omit<ExpenseEntry, 'id'>) => void;
   onAddInvestment: (entry: Omit<InvestmentEntry, 'id'>) => void;
   onAddCard: (card: Omit<Card, 'id'>) => void;
+  onUpdateCard: (id: string, card: Omit<Card, 'id'>) => void;
+  onDeleteCard: (id: string) => void;
   onDeleteIncome: (id: string) => void;
   onDeleteExpense: (id: string) => void;
   onDeleteInvestment: (id: string) => void;
-}> = ({ income, expenses, investments, cards, onAddIncome, onAddExpense, onAddInvestment, onAddCard, onDeleteIncome, onDeleteExpense, onDeleteInvestment }) => {
-    const [activeQuarter, setActiveQuarter] = useState<number | null>(null);
-    const [financeView, setFinanceView] = useState<FinanceViewType>('wallet');
-    const [selectedCardId, setSelectedCardId] = useState<string | null>(cards[0]?.id || null);
-    const [isAddCardModalOpen, setIsAddCardModalOpen] = useState(false);
-    const [dragStart, setDragStart] = useState<number | null>(null);
-    const [dragOffset, setDragOffset] = useState(0);
-    const [isDragging, setIsDragging] = useState(false);
-
-    useEffect(() => {
+}> = ({ income, expenses, investments, cards, onAddIncome, onAddExpense, onAddInvestment, onAddCard, onUpdateCard, onDeleteCard, onDeleteIncome, onDeleteExpense, onDeleteInvestment }) => {
+  const [activeQuarter, setActiveQuarter] = useState<number | null>(null);
+  const [financeView, setFinanceView] = useState<FinanceViewType>('wallet');
+  const [selectedCardId, setSelectedCardId] = useState<string | null>(cards[0]?.id || null);
+  const [isAddCardModalOpen, setIsAddCardModalOpen] = useState(false);
+  const [editingCard, setEditingCard] = useState<Card | null>(null);
+  const [dragStart, setDragStart] = useState<number | null>(null);
+  const [dragOffset, setDragOffset] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);    useEffect(() => {
         if (!selectedCardId && cards.length > 0) {
             setSelectedCardId(cards[0].id);
         } else if (cards.length === 0) {
@@ -270,6 +319,13 @@ export const FinanceView: React.FC<{
         setIsAddCardModalOpen(false);
     };
 
+    const handleEditCard = (cardData: Omit<Card, 'id'>) => {
+        if (editingCard) {
+            onUpdateCard(editingCard.id, cardData);
+            setEditingCard(null);
+        }
+    };
+
     const formatCurrency = (amount: number) => {
         return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);
     };
@@ -309,9 +365,9 @@ export const FinanceView: React.FC<{
             <div style={{ 
               display: 'flex', 
               gap: '0.5rem', 
-              marginBottom: '2rem',
+              marginBottom: '1.35rem',
               borderBottom: '1px solid var(--border-color)',
-              paddingBottom: '0.5rem',
+              paddingBottom: '0.35rem',
               marginLeft: '0',
             }}>
                 <button
@@ -319,10 +375,10 @@ export const FinanceView: React.FC<{
                     style={{
                       backgroundColor: financeView === 'wallet' ? 'rgba(99, 102, 241, 0.15)' : 'transparent',
                       border: 'none',
-                      borderRadius: '8px',
+                      borderRadius: '5px',
                       color: financeView === 'wallet' ? '#6366f1' : 'var(--text-secondary)',
-                      padding: '0.75rem 1.5rem',
-                      fontSize: '0.95rem',
+                      padding: '0.5rem 1rem',
+                      fontSize: '0.65rem',
                       fontWeight: 600,
                       cursor: 'pointer',
                       transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -349,10 +405,10 @@ export const FinanceView: React.FC<{
                     style={{
                       backgroundColor: financeView === 'transactions' ? 'rgba(99, 102, 241, 0.15)' : 'transparent',
                       border: 'none',
-                      borderRadius: '8px',
+                      borderRadius: '5px',
                       color: financeView === 'transactions' ? '#6366f1' : 'var(--text-secondary)',
-                      padding: '0.75rem 1.5rem',
-                      fontSize: '0.95rem',
+                      padding: '0.5rem 1rem',
+                      fontSize: '0.65rem',
                       fontWeight: 600,
                       cursor: 'pointer',
                       transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -379,10 +435,10 @@ export const FinanceView: React.FC<{
                     style={{
                       backgroundColor: financeView === 'overview' ? 'rgba(99, 102, 241, 0.15)' : 'transparent',
                       border: 'none',
-                      borderRadius: '8px',
+                      borderRadius: '5px',
                       color: financeView === 'overview' ? '#6366f1' : 'var(--text-secondary)',
-                      padding: '0.75rem 1.5rem',
-                      fontSize: '0.95rem',
+                      padding: '0.5rem 1rem',
+                      fontSize: '0.65rem',
                       fontWeight: 600,
                       cursor: 'pointer',
                       transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -409,10 +465,10 @@ export const FinanceView: React.FC<{
 
             {financeView === 'wallet' && (
                 <div style={styles.walletContainer}>
-                     <header style={{...styles.header, ...styles.financeHeader, marginBottom: '2rem'}}>
+                     <header style={{...styles.header, ...styles.financeHeader, marginBottom: '1.35rem'}}>
                         <div>
-                            <h1 style={{...styles.h1, display: 'flex', alignItems: 'center', gap: '0.75rem'}}>
-                              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{color: 'var(--primary-color)'}}>
+                            <h1 style={{...styles.h1, display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{color: 'var(--primary-color)'}}>
                                 <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
                                 <line x1="1" y1="10" x2="23" y2="10"></line>
                               </svg>
@@ -430,7 +486,7 @@ export const FinanceView: React.FC<{
                             action={<button style={{...styles.button, width: 'auto'}} onClick={() => setIsAddCardModalOpen(true)}>+ Add First Card</button>}
                         />
                     ) : (
-                        <div style={{display: 'flex', flexDirection: 'column', gap: '2rem'}}>
+                        <div style={{display: 'flex', flexDirection: 'column', gap: '1.35rem'}}>
                            <div 
                                 style={{...styles.walletCardStack, marginLeft: 'auto', marginRight: 'auto'}}
                                 onMouseDown={handleDragStart}
@@ -472,6 +528,69 @@ export const FinanceView: React.FC<{
                                         >
                                             <div style={{...styles.walletCard}}>
                                                 <div style={{...styles.walletCardBg, ...cardThemes[card.theme]}} />
+                                                {isSelected && (
+                                                    <div style={{
+                                                        position: 'absolute',
+                                                        top: '0.67rem',
+                                                        right: '0.67rem',
+                                                        display: 'flex',
+                                                        gap: '0.5rem',
+                                                        zIndex: 10,
+                                                    }}>
+                                                        <button
+                                                            onClick={(e) => {
+                                                                e.stopPropagation();
+                                                                setEditingCard(card);
+                                                            }}
+                                                            style={{
+                                                                background: 'rgba(0,0,0,0.5)',
+                                                                border: 'none',
+                                                                borderRadius: '0.27rem',
+                                                                width: '1.8rem',
+                                                                height: '1.8rem',
+                                                                display: 'flex',
+                                                                alignItems: 'center',
+                                                                justifyContent: 'center',
+                                                                cursor: 'pointer',
+                                                                color: 'white',
+                                                                padding: 0,
+                                                            }}
+                                                            title="Edit card"
+                                                        >
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                                            </svg>
+                                                        </button>
+                                                        <button
+                                                            onClick={(e) => {
+                                                                e.stopPropagation();
+                                                                if (confirm(`Delete card "${card.nickname}"?`)) {
+                                                                    onDeleteCard(card.id);
+                                                                }
+                                                            }}
+                                                            style={{
+                                                                background: 'rgba(220,38,38,0.8)',
+                                                                border: 'none',
+                                                                borderRadius: '0.27rem',
+                                                                width: '1.8rem',
+                                                                height: '1.8rem',
+                                                                display: 'flex',
+                                                                alignItems: 'center',
+                                                                justifyContent: 'center',
+                                                                cursor: 'pointer',
+                                                                color: 'white',
+                                                                padding: 0,
+                                                            }}
+                                                            title="Delete card"
+                                                        >
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                                <polyline points="3 6 5 6 21 6"></polyline>
+                                                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                                            </svg>
+                                                        </button>
+                                                    </div>
+                                                )}
                                                 <div style={styles.walletCardHeader}>
                                                     <span style={styles.walletCardBank}>{card.bank_name}</span>
                                                     <div style={styles.walletCardChip} />
@@ -481,7 +600,7 @@ export const FinanceView: React.FC<{
                                                         <div style={{ ...styles.walletCardHolder, fontSize: '0.7rem', marginTop: 0, opacity: 0.8 }}>
                                                             {card.card_type === 'Credit' ? 'Credit Limit' : 'Available Balance'}
                                                         </div>
-                                                        <div style={{...styles.walletCardNumber, fontSize: '1.6rem', letterSpacing: '0.05em', marginTop: '0.25rem' }}>
+                                                        <div style={{...styles.walletCardNumber, fontSize: '1.1rem', letterSpacing: '0.05em', marginTop: '0.15rem' }}>
                                                             {formatCurrency(card.limit)}
                                                         </div>
                                                     </div>
@@ -498,14 +617,14 @@ export const FinanceView: React.FC<{
                                 })}
                             </div>
                             <div style={{width: '100%'}}>
-                                <h2 style={{...styles.h1, fontSize: '1.5rem', marginBottom: '1.5rem'}}>Latest Transactions</h2>
+                                <h2 style={{...styles.h1, fontSize: '1rem', marginBottom: '1rem'}}>Latest Transactions</h2>
                                 {expenses.length > 0 ? (
                                     <div style={styles.walletTransactionList}>
                                         {expenses.slice(0, 5).map(expense => (
                                             <div key={expense.id} style={styles.walletTransactionRow}>
                                                 <div>
                                                     <span style={{color: 'var(--text-primary)', display: 'block'}}>{expense.source}</span>
-                                                    <span style={{color: 'var(--text-secondary)', fontSize: '0.8rem'}}>{new Date(expense.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', timeZone: 'UTC' })}</span>
+                                                    <span style={{color: 'var(--text-secondary)', fontSize: '0.55rem'}}>{new Date(expense.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', timeZone: 'UTC' })}</span>
                                                 </div>
                                                 <span style={{color: 'var(--text-primary)', fontWeight: 500}}>- {formatCurrency(expense.amount)}</span>
                                             </div>
@@ -556,7 +675,7 @@ export const FinanceView: React.FC<{
                                     <span>Expenses</span>
                                     <span style={{...styles.monthCardValue, color: '#ff453a'}}>{formatCurrency(month.expenses)}</span>
                                 </div>
-                                <div style={{...styles.monthCardRow, borderTop: '1px solid var(--border-color)', paddingTop: '1rem', marginTop: '0.5rem'}}>
+                                <div style={{...styles.monthCardRow, borderTop: '1px solid var(--border-color)', paddingTop: '0.65rem', marginTop: '0.35rem'}}>
                                     <span style={{fontWeight: 600}}>Net</span>
                                     <span style={{...styles.monthCardValue, fontWeight: 600}}>{formatCurrency(month.net)}</span>
                                 </div>
@@ -567,7 +686,7 @@ export const FinanceView: React.FC<{
             )}
 
             {financeView === 'transactions' && (
-                 <div style={{display: 'flex', flexDirection: 'column', gap: '2rem'}}>
+                 <div style={{display: 'flex', flexDirection: 'column', gap: '1.35rem'}}>
                     <TransactionTable 
                         title="Income" 
                         entries={income} 
@@ -592,6 +711,7 @@ export const FinanceView: React.FC<{
                 </div>
             )}
             {isAddCardModalOpen && <AddCardModal onClose={() => setIsAddCardModalOpen(false)} onAdd={handleAddCard} />}
+            {editingCard && <EditCardModal onClose={() => setEditingCard(null)} onUpdate={handleEditCard} card={editingCard} />}
         </div>
     );
 };

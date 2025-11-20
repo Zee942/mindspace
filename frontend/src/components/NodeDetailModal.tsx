@@ -135,17 +135,17 @@ export const NodeDetailModal: React.FC<NodeDetailModalProps> = ({
           onClick={onClose}
           style={{
             position: 'absolute',
-            top: '1.5rem',
-            right: '1.5rem',
+            top: '1rem',
+            right: '1rem',
             color: 'var(--text-secondary)',
             background: 'none',
             border: 'none',
             cursor: 'pointer',
-            padding: '0.5rem',
+            padding: '0.35rem',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            borderRadius: '8px',
+            borderRadius: '6px',
             transition: 'all 0.2s ease',
             zIndex: 10,
           }}
@@ -161,8 +161,8 @@ export const NodeDetailModal: React.FC<NodeDetailModalProps> = ({
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
+            width="16"
+            height="16"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -180,18 +180,18 @@ export const NodeDetailModal: React.FC<NodeDetailModalProps> = ({
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            marginBottom: '1.5rem',
+            marginBottom: '1rem',
           }}
         >
-          <h1 style={{ ...styles.h1, fontSize: '2rem' }}>Edit Node</h1>
+          <h1 style={{ ...styles.h1, fontSize: '1.35rem' }}>Edit Node</h1>
         </header>
         <form
           style={{
             display: 'flex',
             flexDirection: 'column',
-            gap: '1.25rem',
+            gap: '0.85rem',
             overflowY: 'auto',
-            paddingRight: '1rem',
+            paddingRight: '0.65rem',
           }}
           onSubmit={handleSaveChanges}
         >
@@ -218,7 +218,7 @@ export const NodeDetailModal: React.FC<NodeDetailModalProps> = ({
               onChange={e => setEditedType(e.target.value as NodeType)}
             >
               {nodeTypes.map(type => (
-                <option key={type} value={type} style={{ backgroundColor: '#2d2d30', color: '#ffffff', padding: '0.5rem' }}>
+                <option key={type} value={type} style={{ backgroundColor: '#2d2d30', color: '#ffffff', padding: '0.35rem' }}>
                   {type}
                 </option>
               ))}
@@ -234,8 +234,8 @@ export const NodeDetailModal: React.FC<NodeDetailModalProps> = ({
               style={{
                 ...styles.futuristicFormElement,
                 ...styles.input,
-                padding: '0.25rem 0.5rem',
-                height: '40px',
+                padding: '0.2rem 0.35rem',
+                height: '27px',
                 cursor: 'pointer',
               }}
               value={editedColor}
@@ -257,11 +257,11 @@ export const NodeDetailModal: React.FC<NodeDetailModalProps> = ({
           <div style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '1rem',
-            padding: '1rem',
+            gap: '0.65rem',
+            padding: '0.65rem',
             backgroundColor: editedCompleted ? 'rgba(52, 199, 89, 0.1)' : 'rgba(255, 255, 255, 0.03)',
             border: `1px solid ${editedCompleted ? 'rgba(52, 199, 89, 0.3)' : 'var(--border-color)'}`,
-            borderRadius: '12px',
+            borderRadius: '8px',
             cursor: 'pointer',
             transition: 'all 0.2s ease',
           }}
@@ -272,17 +272,17 @@ export const NodeDetailModal: React.FC<NodeDetailModalProps> = ({
               checked={editedCompleted}
               onChange={(e) => setEditedCompleted(e.target.checked)}
               style={{
-                width: '20px',
-                height: '20px',
+                width: '13px',
+                height: '13px',
                 cursor: 'pointer',
                 accentColor: '#34C759',
               }}
             />
             <div>
-              <label style={{...styles.label, marginBottom: '0.25rem', cursor: 'pointer'}}>
+              <label style={{...styles.label, marginBottom: '0.2rem', cursor: 'pointer'}}>
                 Mark as Completed
               </label>
-              <p style={{...styles.p, fontSize: '0.85rem', margin: 0, color: 'var(--text-tertiary)'}}>
+              <p style={{...styles.p, fontSize: '0.65rem', margin: 0, color: 'var(--text-tertiary)'}}>
                 {editedCompleted ? 'Node is marked as done and will appear greyed out' : 'Click to mark this node as completed'}
               </p>
             </div>
@@ -295,8 +295,8 @@ export const NodeDetailModal: React.FC<NodeDetailModalProps> = ({
           )}
 
           {connectedNodes.length > 0 && (
-            <div style={{ marginTop: '1rem' }}>
-              <h4 style={{ ...styles.nodeTitle, fontSize: '1.2rem', marginBottom: '1rem' }}>
+            <div style={{ marginTop: '0.65rem' }}>
+              <h4 style={{ ...styles.nodeTitle, fontSize: '0.85rem', marginBottom: '0.65rem' }}>
                 Connections
               </h4>
               <ul style={styles.connectionsList}>
@@ -320,9 +320,9 @@ export const NodeDetailModal: React.FC<NodeDetailModalProps> = ({
             style={{
               display: 'flex',
               flexDirection: 'column',
-              gap: '0.75rem',
-              marginTop: '1.5rem',
-              paddingTop: '1.5rem',
+              gap: '0.5rem',
+              marginTop: '1rem',
+              paddingTop: '1rem',
               borderTop: '1px solid var(--border-color)',
             }}
           >

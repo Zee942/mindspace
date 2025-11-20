@@ -175,8 +175,8 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
         context.stroke();
       };
 
-      drawGrid(200, 'rgba(0, 122, 255, 0.08)');
-      drawGrid(50, 'rgba(0, 122, 255, 0.12)');
+      drawGrid(135, 'rgba(0, 122, 255, 0.08)');
+      drawGrid(35, 'rgba(0, 122, 255, 0.12)');
 
       // Draw links
       context.beginPath();
@@ -218,20 +218,20 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
           context.beginPath();
           if (d.type === 'Task') {
             // Triangle selection
-            const size = 30;
+            const size = 20;
             context.moveTo(d.x!, d.y! - size);
             context.lineTo(d.x! - size * 0.866, d.y! + size * 0.5);
             context.lineTo(d.x! + size * 0.866, d.y! + size * 0.5);
             context.closePath();
           } else if (d.type === 'Goal') {
             // Square selection
-            const size = 30;
+            const size = 20;
             context.rect(d.x! - size, d.y! - size, size * 2, size * 2);
           } else {
             // Circle selection for Skill and Link
-            context.arc(d.x!, d.y!, 30, 0, 2 * Math.PI);
+            context.arc(d.x!, d.y!, 20, 0, 2 * Math.PI);
           }
-          const selectionGradient = context.createRadialGradient(d.x!, d.y!, 24, d.x!, d.y!, 30);
+          const selectionGradient = context.createRadialGradient(d.x!, d.y!, 16, d.x!, d.y!, 20);
           selectionGradient.addColorStop(0, 'rgba(0, 199, 255, 0)');
           selectionGradient.addColorStop(0.8, 'rgba(0, 199, 255, 0.5)');
           selectionGradient.addColorStop(1, 'rgba(0, 199, 255, 0.7)');
@@ -243,26 +243,26 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
         context.beginPath();
         if (d.type === 'Task') {
           // Triangle corona
-          const size = 24 * scale;
+          const size = 16 * scale;
           context.moveTo(d.x!, d.y! - size);
           context.lineTo(d.x! - size * 0.866, d.y! + size * 0.5);
           context.lineTo(d.x! + size * 0.866, d.y! + size * 0.5);
           context.closePath();
         } else if (d.type === 'Goal') {
           // Square corona
-          const size = 24 * scale;
+          const size = 16 * scale;
           context.rect(d.x! - size, d.y! - size, size * 2, size * 2);
         } else if (d.type === 'Link') {
           // Chain link corona
-          const size = 20 * scale;
+          const size = 13 * scale;
           context.arc(d.x! - size * 0.4, d.y!, size * 0.5, 0, 2 * Math.PI);
           context.moveTo(d.x! + size * 0.9, d.y!);
           context.arc(d.x! + size * 0.4, d.y!, size * 0.5, 0, 2 * Math.PI);
         } else {
           // Circle corona for Skill
-          context.arc(d.x!, d.y!, 24 * scale, 0, 2 * Math.PI);
+          context.arc(d.x!, d.y!, 16 * scale, 0, 2 * Math.PI);
         }
-        const coronaGradient = context.createRadialGradient(d.x!, d.y!, 10 * scale, d.x!, d.y!, 24 * scale);
+        const coronaGradient = context.createRadialGradient(d.x!, d.y!, 7 * scale, d.x!, d.y!, 16 * scale);
         const transparentNodeColor = d3.color(nodeColor)!.copy({ opacity: 0 }).toString();
         const semiTransparentNodeColor = d3.color(nodeColor)!.copy({ opacity: 0.5 }).toString();
         coronaGradient.addColorStop(0, semiTransparentNodeColor);
@@ -274,18 +274,18 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
         context.beginPath();
         if (d.type === 'Task') {
           // Triangle main
-          const size = 10 * scale;
+          const size = 7 * scale;
           context.moveTo(d.x!, d.y! - size);
           context.lineTo(d.x! - size * 0.866, d.y! + size * 0.5);
           context.lineTo(d.x! + size * 0.866, d.y! + size * 0.5);
           context.closePath();
         } else if (d.type === 'Goal') {
           // Square main
-          const size = 10 * scale;
+          const size = 7 * scale;
           context.rect(d.x! - size, d.y! - size, size * 2, size * 2);
         } else if (d.type === 'Link') {
           // Chain link icon - two connected ovals
-          const size = 9 * scale;
+          const size = 6 * scale;
           
           // Left oval
           context.beginPath();
@@ -307,7 +307,7 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
           context.lineWidth = 1;
         } else {
           // Circle main for Skill
-          context.arc(d.x!, d.y!, 10 * scale, 0, 2 * Math.PI);
+          context.arc(d.x!, d.y!, 7 * scale, 0, 2 * Math.PI);
         }
         context.fillStyle = nodeColor;
         context.shadowColor = nodeColor;
@@ -319,24 +319,24 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
         context.beginPath();
         if (d.type === 'Task') {
           // Triangle ring
-          const size = 12 * scale;
+          const size = 8 * scale;
           context.moveTo(d.x!, d.y! - size);
           context.lineTo(d.x! - size * 0.866, d.y! + size * 0.5);
           context.lineTo(d.x! + size * 0.866, d.y! + size * 0.5);
           context.closePath();
         } else if (d.type === 'Goal') {
           // Square ring
-          const size = 12 * scale;
+          const size = 8 * scale;
           context.rect(d.x! - size, d.y! - size, size * 2, size * 2);
         } else if (d.type === 'Link') {
           // Chain link ring
-          const size = 8 * scale;
+          const size = 5 * scale;
           context.arc(d.x! - size * 0.5, d.y!, size * 0.75, 0, 2 * Math.PI);
           context.moveTo(d.x! + size * 1.25, d.y!);
           context.arc(d.x! + size * 0.5, d.y!, size * 0.75, 0, 2 * Math.PI);
         } else {
           // Circle ring for Skill
-          context.arc(d.x!, d.y!, 12 * scale, 0, 2 * Math.PI);
+          context.arc(d.x!, d.y!, 8 * scale, 0, 2 * Math.PI);
         }
         context.strokeStyle = isHovered ? '#fff' : (d3.color(nodeColor)?.brighter(1.5).toString() || '#fff');
         context.lineWidth = isHovered ? 2.5 : 2;
@@ -346,24 +346,24 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
         context.beginPath();
         if (d.type === 'Task') {
           // Triangle core
-          const size = 4 * scale;
+          const size = 3 * scale;
           context.moveTo(d.x!, d.y! - size);
           context.lineTo(d.x! - size * 0.866, d.y! + size * 0.5);
           context.lineTo(d.x! + size * 0.866, d.y! + size * 0.5);
           context.closePath();
         } else if (d.type === 'Goal') {
           // Square core
-          const size = 4 * scale;
+          const size = 3 * scale;
           context.rect(d.x! - size, d.y! - size, size * 2, size * 2);
         } else if (d.type === 'Link') {
           // Chain link cores - small circles
-          const size = 8 * scale;
+          const size = 5 * scale;
           context.arc(d.x! - size * 0.5, d.y!, size * 0.3, 0, 2 * Math.PI);
           context.moveTo(d.x! + size * 0.8, d.y!);
           context.arc(d.x! + size * 0.5, d.y!, size * 0.3, 0, 2 * Math.PI);
         } else {
           // Circle core for Skill
-          context.arc(d.x!, d.y!, 4 * scale, 0, 2 * Math.PI);
+          context.arc(d.x!, d.y!, 3 * scale, 0, 2 * Math.PI);
         }
         context.fillStyle = '#fff';
         context.fill();
@@ -371,13 +371,13 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
         const isConnectSource = connectMode.active && d.id === connectMode.source;
         if (isConnectSource) {
           context.beginPath();
-          context.arc(d.x!, d.y!, 22, 0, 2 * Math.PI);
+          context.arc(d.x!, d.y!, 15, 0, 2 * Math.PI);
           context.strokeStyle = 'rgba(160, 102, 255, 0.8)';
           context.lineWidth = 1.5;
           context.stroke();
 
           context.beginPath();
-          context.arc(d.x!, d.y!, 28, 0, 2 * Math.PI);
+          context.arc(d.x!, d.y!, 19, 0, 2 * Math.PI);
           context.strokeStyle = 'rgba(160, 102, 255, 0.4)';
           context.lineWidth = 3;
           context.stroke();
@@ -390,11 +390,11 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
         const isDimmed = searchTermLower && !matchedNodeIds.has(d.id) && !neighborNodeIds.has(d.id);
         if (!isDimmed) {
           const label = d.title.length > 25 ? d.title.substring(0, 22) + '...' : d.title;
-          context.font = isSelected ? '700 14px var(--font-family)' : '500 14px var(--font-family)';
+          context.font = isSelected ? '700 10px var(--font-family)' : '500 10px var(--font-family)';
           context.fillStyle = isSelected ? 'var(--primary-color)' : 'var(--text-primary)';
           context.textAlign = 'center';
           context.textBaseline = 'top';
-          context.fillText(label, d.x!, d.y! + 25);
+          context.fillText(label, d.x!, d.y! + 17);
         }
       };
 
@@ -526,23 +526,23 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
       {/* Legend */}
       <div style={{
         position: 'absolute',
-        bottom: '2rem',
-        left: '2rem',
+        bottom: '1.35rem',
+        left: '1.35rem',
         backgroundColor: 'rgba(30, 30, 35, 0.95)',
         backdropFilter: 'blur(10px)',
         border: '1px solid var(--border-color)',
-        borderRadius: '12px',
-        padding: '1.25rem',
+        borderRadius: '8px',
+        padding: '0.85rem',
         display: 'flex',
         flexDirection: 'column',
-        gap: '0.75rem',
+        gap: '0.5rem',
         boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
       }}>
         <div style={{
-          fontSize: '0.85rem',
+          fontSize: '0.65rem',
           fontWeight: 600,
           color: 'var(--text-secondary)',
-          marginBottom: '0.20rem',
+          marginBottom: '0.15rem',
           letterSpacing: '0.5px',
         }}>
           LEGEND
@@ -557,19 +557,19 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
           <div key={type} style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '0.75rem',
+            gap: '0.5rem',
           }}>
             <span style={{
-              fontSize: '1.25rem',
+              fontSize: '0.85rem',
               color: color,
-              width: '20px',
+              width: '14px',
               textAlign: 'center',
               filter: 'drop-shadow(0 0 4px currentColor)',
             }}>
               {shape}
             </span>
             <span style={{
-              fontSize: '0.9rem',
+              fontSize: '0.7rem',
               color: 'var(--text-primary)',
               fontWeight: 500,
             }}>
@@ -584,20 +584,20 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
         onClick={recenterView}
         style={{
           position: 'absolute',
-          top: '2rem',
-          right: '2rem',
+          top: '1.35rem',
+          right: '1.35rem',
           backgroundColor: 'rgba(255, 255, 255, 0.1)',
           backdropFilter: 'blur(10px)',
           border: '1px solid rgba(255, 255, 255, 0.2)',
-          borderRadius: '12px',
-          padding: '0.75rem',
+          borderRadius: '8px',
+          padding: '0.5rem',
           color: '#ffffff',
-          fontSize: '0.9rem',
+          fontSize: '0.7rem',
           fontWeight: 600,
           cursor: 'pointer',
           display: 'flex',
           alignItems: 'center',
-          gap: '0.5rem',
+          gap: '0.35rem',
           boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2)',
           transition: 'all 0.2s ease',
         }}
@@ -613,7 +613,7 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
         }}
         title="Recenter view to fit all nodes"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
           <path d="M21 3v5h-5"></path>
           <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
@@ -627,20 +627,20 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
           onClick={() => centerOnNode(selectedNodeId)}
           style={{
             position: 'absolute',
-            bottom: '2rem',
-            right: '2rem',
+            bottom: '1.35rem',
+            right: '1.35rem',
             backgroundColor: 'rgba(99, 102, 241, 0.9)',
             backdropFilter: 'blur(10px)',
             border: '1px solid rgba(99, 102, 241, 0.4)',
-            borderRadius: '12px',
-            padding: '0.875rem 1.5rem',
+            borderRadius: '8px',
+            padding: '0.6rem 1rem',
             color: '#ffffff',
-            fontSize: '0.9rem',
+            fontSize: '0.7rem',
             fontWeight: 600,
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
-            gap: '0.5rem',
+            gap: '0.35rem',
             boxShadow: '0 8px 32px rgba(99, 102, 241, 0.3)',
             transition: 'all 0.2s ease',
           }}

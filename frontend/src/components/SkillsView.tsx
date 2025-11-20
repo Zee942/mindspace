@@ -56,9 +56,9 @@ const SkillCard: React.FC<{ skill: Skill, connectionCount: number }> = ({ skill,
                 {skill.summary && <p style={styles.skillCardSummary}>{skill.summary.substring(0, 100)}{skill.summary.length > 100 ? '...' : ''}</p>}
             </div>
             <div style={styles.skillCardFooter}>
-                 <div style={{display: 'flex', flexDirection: 'column', gap: '0.25rem', alignItems: 'flex-start'}}>
+                 <div style={{display: 'flex', flexDirection: 'column', gap: '0.15rem', alignItems: 'flex-start'}}>
                     <span>{connectionCount} Connections</span>
-                    {skill.category && <span style={{...styles.taskCardSkillBadge, padding: '0.1rem 0.5rem', fontSize: '0.7rem', backgroundColor: 'rgba(255,255,255,0.1)', color: 'var(--text-secondary)'}}>{skill.category}</span>}
+                    {skill.category && <span style={{...styles.taskCardSkillBadge, padding: '0.05rem 0.35rem', fontSize: '0.7rem', backgroundColor: 'rgba(255,255,255,0.1)', color: 'var(--text-secondary)'}}>{skill.category}</span>}
                 </div>
                 <span style={{color: skill.color || badgeColors['Skill']}}>● Skill</span>
             </div>
@@ -86,7 +86,7 @@ const AddSkillModal: React.FC<{
       <div style={styles.modalContainer} onClick={(e) => e.stopPropagation()}>
         <header style={{...styles.header, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start'}}>
           <div>
-            <h1 style={{...styles.h1, fontSize: '2rem'}}>Add New Skill</h1>
+            <h1 style={{...styles.h1, fontSize: '1.35rem'}}>Add New Skill</h1>
             <p style={styles.p}>Define a new skill to track in your matrix.</p>
           </div>
           <button onClick={onClose} style={{...styles.navButton, color: 'var(--text-secondary)', background: 'none', border: 'none', backdropFilter: 'none'}} aria-label="Close add skill form">
@@ -128,7 +128,7 @@ const AddSkillModal: React.FC<{
               onChange={(e) => setSummary(e.target.value)}
             />
           </div>
-          <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+          <div style={{ display: 'flex', gap: '0.65rem', marginTop: '0.65rem' }}>
             <button type="button" onClick={onClose} style={{ ...styles.button, backgroundColor: 'rgba(255,255,255,0.1)', color: 'var(--text-primary)'}}>
               Cancel
             </button>
@@ -197,7 +197,7 @@ const SkillDetailView: React.FC<{
                             <input
                               id="edit-skill-title"
                               type="text"
-                              style={{ ...styles.input, fontSize: '2rem', padding: '0.5rem' }}
+                              style={{ ...styles.input, fontSize: '1.35rem', padding: '0.35rem' }}
                               value={editedTitle}
                               onChange={(e) => setEditedTitle(e.target.value)}
                               autoFocus
@@ -205,19 +205,19 @@ const SkillDetailView: React.FC<{
                         </div>
                     ) : (
                         <div>
-                            <h1 style={{...styles.h1, fontSize: '2rem'}}>{skill.title}</h1>
-                            {skill.category && <p style={{...styles.p, color: 'var(--primary-color)', fontWeight: 500, marginTop: '-0.25rem', marginBottom: '0.5rem'}}>{skill.category}</p>}
+                            <h1 style={{...styles.h1, fontSize: '1.35rem'}}>{skill.title}</h1>
+                            {skill.category && <p style={{...styles.p, color: 'var(--primary-color)', fontWeight: 500, marginTop: '-0.15rem', marginBottom: '0.35rem'}}>{skill.category}</p>}
                             <p style={styles.p}>{skill.summary}</p>
                         </div>
                     )}
-                    <button onClick={onClose} style={{...styles.navButton, color: 'var(--text-secondary)', background: 'none', border: 'none', backdropFilter: 'none', marginLeft: '1rem', flexShrink: 0}} aria-label="Close skill details">
+                    <button onClick={onClose} style={{...styles.navButton, color: 'var(--text-secondary)', background: 'none', border: 'none', backdropFilter: 'none', marginLeft: '0.65rem', flexShrink: 0}} aria-label="Close skill details">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                     </button>
                 </header>
 
                 {isEditing && (
                     <>
-                        <div style={{width: '100%', marginTop: '-1rem'}}>
+                        <div style={{width: '100%', marginTop: '-0.65rem'}}>
                             <label htmlFor="edit-skill-category" style={styles.label}>Category</label>
                             <input
                               id="edit-skill-category"
@@ -242,7 +242,7 @@ const SkillDetailView: React.FC<{
                 <div style={styles.progressContainer}>
                     <div style={styles.progressBarLabel}>
                         <label style={styles.label}>Proficiency</label>
-                        <span style={{color: 'var(--secondary-color)', fontWeight: 600, fontSize: '1rem'}}>{skill.progress || 0}%</span>
+                        <span style={{color: 'var(--secondary-color)', fontWeight: 600, fontSize: '0.7rem'}}>{skill.progress || 0}%</span>
                     </div>
                     <input
                         type="range"
@@ -260,14 +260,14 @@ const SkillDetailView: React.FC<{
                 
                  {connections.length > 0 && (
                     <div>
-                        <h4 style={{...styles.nodeTitle, fontSize: '1.2rem', marginBottom: '1rem'}}>Connections on Map</h4>
+                        <h4 style={{...styles.nodeTitle, fontSize: '0.8rem', marginBottom: '0.65rem'}}>Connections on Map</h4>
                         <ul style={{...styles.connectionsList, gap: '0.5rem'}}>
                             {connections.map(connectedNode => (
                                 <li key={connectedNode.id} style={{...styles.futuristicConnectionItem, backgroundColor: 'rgba(160, 102, 255, 0.08)', borderColor: 'rgba(160, 102, 255, 0.2)'}}>
                                     <span style={{color: 'var(--text-primary)'}}>{connectedNode.title}</span>
                                     <span style={{
                                         color: connectedNode.color || badgeColors[connectedNode.type],
-                                        fontSize: '0.8rem',
+                                        fontSize: '0.55rem',
                                         fontWeight: 500
                                     }}>● {connectedNode.type}</span>
                                 </li>
@@ -277,7 +277,7 @@ const SkillDetailView: React.FC<{
                 )}
                 
                 {isEditing ? (
-                     <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+                     <div style={{ display: 'flex', gap: '0.65rem', marginTop: '0.65rem' }}>
                         <button onClick={handleCancel} style={{ ...styles.button, backgroundColor: 'rgba(255,255,255,0.1)', color: 'var(--text-primary)'}}>
                           Cancel
                         </button>
@@ -290,7 +290,7 @@ const SkillDetailView: React.FC<{
                         </button>
                     </div>
                 ) : (
-                    <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid var(--border-color)' }}>
+                    <div style={{ display: 'flex', gap: '0.65rem', marginTop: '0.65rem', paddingTop: '0.65rem', borderTop: '1px solid var(--border-color)' }}>
                         <button
                             style={{...styles.button, ...styles.secondaryButton, ...(isOnMap ? styles.buttonDisabled : {})}}
                             onClick={() => onShareSkillToMap(skill)}
@@ -394,10 +394,10 @@ export const SkillsView: React.FC<{
 
     return (
         <div style={styles.skillsViewContainer}>
-            <header style={{...styles.header, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2rem'}}>
+            <header style={{...styles.header, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.35rem'}}>
               <div>
-                <h1 style={{...styles.h1, display: 'flex', alignItems: 'center', gap: '0.75rem'}}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{color: 'var(--primary-color)'}}>
+                <h1 style={{...styles.h1, display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{color: 'var(--primary-color)'}}>
                     <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
                     <path d="M6 12v5c0 1.66 4 3 6 3s6-1.34 6-3v-5"></path>
                   </svg>
@@ -410,12 +410,39 @@ export const SkillsView: React.FC<{
               </button>
             </header>
             {categories.length > 1 && (
-                <div style={{...styles.filterGroup, justifyContent: 'center', padding: '0.5rem', border: 'none', backgroundColor: 'transparent'}}>
+                <div style={{ 
+                    display: 'flex', 
+                    gap: '0.35rem', 
+                    marginBottom: '1.35rem',
+                    borderBottom: '1px solid var(--border-color)',
+                    paddingBottom: '0.35rem',
+                    marginLeft: '0',
+                }}>
                     {categories.map(category => (
                         <button
                             key={category}
-                            style={{...styles.filterButton, ...(activeCategory === category ? styles.filterButtonActive : {})}}
+                            style={{
+                                backgroundColor: activeCategory === category ? 'rgba(99, 102, 241, 0.15)' : 'transparent',
+                                border: 'none',
+                                borderRadius: '5px',
+                                color: activeCategory === category ? '#6366f1' : 'var(--text-secondary)',
+                                padding: '0.5rem 1rem',
+                                fontSize: '0.65rem',
+                                fontWeight: 600,
+                                cursor: 'pointer',
+                                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                            }}
                             onClick={() => setActiveCategory(category)}
+                            onMouseEnter={(e) => {
+                                if (activeCategory !== category) {
+                                    e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.05)';
+                                }
+                            }}
+                            onMouseLeave={(e) => {
+                                if (activeCategory !== category) {
+                                    e.currentTarget.style.backgroundColor = 'transparent';
+                                }
+                            }}
                         >
                             {category}
                         </button>
