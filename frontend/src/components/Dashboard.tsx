@@ -73,15 +73,15 @@ export const Dashboard: React.FC<DashboardProps> = ({
   };
 
   // Finance calculations
-  const totalIncome = useMemo(() => 
+  const totalIncome = useMemo(() =>
     income.reduce((sum, entry) => sum + entry.amount, 0), [income]
   );
 
-  const totalExpenses = useMemo(() => 
+  const totalExpenses = useMemo(() =>
     expenses.reduce((sum, entry) => sum + entry.amount, 0), [expenses]
   );
 
-  const totalInvestments = useMemo(() => 
+  const totalInvestments = useMemo(() =>
     investments.reduce((sum, entry) => sum + entry.amount, 0), [investments]
   );
 
@@ -91,7 +91,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
   const monthlyData = useMemo(() => {
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     const currentYear = new Date().getFullYear();
-    
+
     return months.map((month, index) => {
       const monthIncome = income.filter(i => {
         const date = new Date(i.date);
@@ -141,17 +141,17 @@ export const Dashboard: React.FC<DashboardProps> = ({
     return allTransactions.slice(0, 6);
   }, [income, expenses, investments]);
 
-    return (
-    <div style={styles.dashboardContainer}>
+  return (
+    <div style={styles.dashboardContainer} className="dashboard-container">
       <header style={{ ...styles.header, marginBottom: '1rem' }}>
         <h1 style={{ ...styles.h1, marginTop: 0, marginBottom: '0.35rem' }}>Dashboard</h1>
         <p style={styles.p}>A high-level overview of your Mind Space.</p>
       </header>
 
       {/* Tab Navigation */}
-      <div style={{ 
-        display: 'flex', 
-        gap: '0.35rem', 
+      <div style={{
+        display: 'flex',
+        gap: '0.35rem',
         marginBottom: '1.35rem',
         borderBottom: '1px solid var(--border-color)',
         paddingBottom: '0.35rem',
@@ -223,128 +223,128 @@ export const Dashboard: React.FC<DashboardProps> = ({
 
       {activeView === 'overview' ? (
         <>
-          <div style={styles.statsGrid}>
-        <div style={styles.statCard}>
-          <h2 style={styles.statCardTitle}>Total Nodes</h2>
-          <p style={styles.statCardValue}>{nodes.length}</p>
-        </div>
-        <div style={styles.statCard}>
-          <h2 style={styles.statCardTitle}>Tasks</h2>
-          <p style={styles.statCardValue}>{tasks.length}</p>
-        </div>
-        <div style={styles.statCard}>
-          <h2 style={styles.statCardTitle}>Skills</h2>
-          <p style={styles.statCardValue}>{skills.length}</p>
-        </div>
-        <div style={styles.statCard}>
-          <h2 style={styles.statCardTitle}>Goals</h2>
-          <p style={styles.statCardValue}>{goals.length}</p>
-        </div>
-        <div style={styles.statCard}>
-          <h2 style={styles.statCardTitle}>Links</h2>
-          <p style={styles.statCardValue}>{links.length}</p>
-        </div>
-      </div>
-      <div style={styles.insightsContainer}>
-        <div style={styles.insightListContainer}>
-          <h3 style={{ ...styles.nodeTitle, fontSize: '0.8rem' }}>Orphan Nodes</h3>
-          <p style={{ ...styles.p, marginTop: '-0.5rem', marginBottom: '1.5rem', fontSize: '0.6rem' }}>
-            Nodes that are not connected to anything.
-          </p>
-          {orphanNodes.length > 0 ? (
-            <ul style={styles.insightList}>
-              {orphanNodes.map(node => (
-                <li key={node.id} style={styles.insightListItem}>
-                  <span style={{ fontSize: '0.65rem' }}>{node.title}</span>
-                  <button
-                    onClick={() => handleNodeClick(node.id)}
-                    style={{
-                      ...styles.button,
-                      backgroundColor: 'var(--secondary-color)',
-                      width: 'auto',
-                      fontSize: '0.55rem',
-                      padding: '0.35rem 0.75rem',
-                    }}
+          <div style={styles.statsGrid} className="stats-grid">
+            <div style={styles.statCard}>
+              <h2 style={styles.statCardTitle}>Total Nodes</h2>
+              <p style={styles.statCardValue}>{nodes.length}</p>
+            </div>
+            <div style={styles.statCard}>
+              <h2 style={styles.statCardTitle}>Tasks</h2>
+              <p style={styles.statCardValue}>{tasks.length}</p>
+            </div>
+            <div style={styles.statCard}>
+              <h2 style={styles.statCardTitle}>Skills</h2>
+              <p style={styles.statCardValue}>{skills.length}</p>
+            </div>
+            <div style={styles.statCard}>
+              <h2 style={styles.statCardTitle}>Goals</h2>
+              <p style={styles.statCardValue}>{goals.length}</p>
+            </div>
+            <div style={styles.statCard}>
+              <h2 style={styles.statCardTitle}>Links</h2>
+              <p style={styles.statCardValue}>{links.length}</p>
+            </div>
+          </div>
+          <div style={styles.insightsContainer}>
+            <div style={styles.insightListContainer}>
+              <h3 style={{ ...styles.nodeTitle, fontSize: '0.8rem' }}>Orphan Nodes</h3>
+              <p style={{ ...styles.p, marginTop: '-0.5rem', marginBottom: '1.5rem', fontSize: '0.6rem' }}>
+                Nodes that are not connected to anything.
+              </p>
+              {orphanNodes.length > 0 ? (
+                <ul style={styles.insightList}>
+                  {orphanNodes.map(node => (
+                    <li key={node.id} style={styles.insightListItem}>
+                      <span style={{ fontSize: '0.65rem' }}>{node.title}</span>
+                      <button
+                        onClick={() => handleNodeClick(node.id)}
+                        style={{
+                          ...styles.button,
+                          backgroundColor: 'var(--secondary-color)',
+                          width: 'auto',
+                          fontSize: '0.55rem',
+                          padding: '0.35rem 0.75rem',
+                        }}
+                      >
+                        View
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <div style={styles.insightEmptyState}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   >
-                    View
-                  </button>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <div style={styles.insightEmptyState}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M14.5 10.5c.3-.3.8-.3 1 0l2.5 2.5c.3.3.3.8 0 1l-2.5 2.5c-.2.2-.7.2-1 0m-5-5c-.3.3-.8.3-1 0l-2.5-2.5c-.3-.3-.3.8 0-1l2.5-2.5c.2-.2.7-.2-1 0m-5 15c.3-.3.8-.3 1 0l2.5 2.5c.3.3.3.8 0 1l-2.5 2.5c-.2.2-.7.2-1 0"></path>
-                <path d="m21.5 21.5-2-2"></path>
-                <path d="m8 8-2-2"></path>
-                <path d="m16 8-2-2"></path>
-                <path d="m16 16-2-2"></path>
-                <path d="m8 16-2-2"></path>
-              </svg>
-              <p>No orphan nodes found. Great job connecting your ideas!</p>
-            </div>
-          )}
-        </div>
-        <div style={styles.insightListContainer}>
-          <h3 style={{ ...styles.nodeTitle, fontSize: '0.8rem' }}>Top Hubs</h3>
-          <p style={{ ...styles.p, marginTop: '-0.5rem', marginBottom: '1.5rem', fontSize: '0.6rem' }}>
-            Your most connected nodes.
-          </p>
-          {topHubs.length > 0 ? (
-            <ul style={styles.insightList}>
-              {topHubs.map(({ node, count }) =>
-                node ? (
-                  <li key={node.id} style={styles.insightListItem}>
-                    <span style={{ fontSize: '0.65rem' }}>{node.title}</span>
-                    <span style={{ color: 'var(--text-secondary)', fontSize: '0.6rem' }}>
-                      {count} connections
-                    </span>
-                  </li>
-                ) : null
+                    <path d="M14.5 10.5c.3-.3.8-.3 1 0l2.5 2.5c.3.3.3.8 0 1l-2.5 2.5c-.2.2-.7.2-1 0m-5-5c-.3.3-.8.3-1 0l-2.5-2.5c-.3-.3-.3.8 0-1l2.5-2.5c.2-.2.7-.2-1 0m-5 15c.3-.3.8-.3 1 0l2.5 2.5c.3.3.3.8 0 1l-2.5 2.5c-.2.2-.7.2-1 0"></path>
+                    <path d="m21.5 21.5-2-2"></path>
+                    <path d="m8 8-2-2"></path>
+                    <path d="m16 8-2-2"></path>
+                    <path d="m16 16-2-2"></path>
+                    <path d="m8 16-2-2"></path>
+                  </svg>
+                  <p>No orphan nodes found. Great job connecting your ideas!</p>
+                </div>
               )}
-            </ul>
-          ) : (
-            <div style={styles.insightEmptyState}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <circle cx="18" cy="5" r="3"></circle>
-                <circle cx="6" cy="12" r="3"></circle>
-                <circle cx="18" cy="19" r="3"></circle>
-              </svg>
-              <p>No connections yet. Start linking nodes on the map!</p>
             </div>
-          )}
-        </div>
-      </div>
-      </>
+            <div style={styles.insightListContainer}>
+              <h3 style={{ ...styles.nodeTitle, fontSize: '0.8rem' }}>Top Hubs</h3>
+              <p style={{ ...styles.p, marginTop: '-0.5rem', marginBottom: '1.5rem', fontSize: '0.6rem' }}>
+                Your most connected nodes.
+              </p>
+              {topHubs.length > 0 ? (
+                <ul style={styles.insightList}>
+                  {topHubs.map(({ node, count }) =>
+                    node ? (
+                      <li key={node.id} style={styles.insightListItem}>
+                        <span style={{ fontSize: '0.65rem' }}>{node.title}</span>
+                        <span style={{ color: 'var(--text-secondary)', fontSize: '0.6rem' }}>
+                          {count} connections
+                        </span>
+                      </li>
+                    ) : null
+                  )}
+                </ul>
+              ) : (
+                <div style={styles.insightEmptyState}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <circle cx="18" cy="5" r="3"></circle>
+                    <circle cx="6" cy="12" r="3"></circle>
+                    <circle cx="18" cy="19" r="3"></circle>
+                  </svg>
+                  <p>No connections yet. Start linking nodes on the map!</p>
+                </div>
+              )}
+            </div>
+          </div>
+        </>
       ) : (
         /* Finance Dashboard View */
         <div style={{ animation: 'fadeIn 0.5s ease-in-out' }}>
           {/* Summary Cards */}
-          <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', 
-            gap: '1.5rem', 
-            marginBottom: '2rem' 
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+            gap: '1.5rem',
+            marginBottom: '2rem'
           }}>
             <div style={{
               ...styles.statCard,
@@ -353,14 +353,14 @@ export const Dashboard: React.FC<DashboardProps> = ({
               transform: 'translateY(0)',
               transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-4px)';
-              e.currentTarget.style.boxShadow = '0 12px 24px rgba(50, 215, 75, 0.15)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = 'none';
-            }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-4px)';
+                e.currentTarget.style.boxShadow = '0 12px 24px rgba(50, 215, 75, 0.15)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
             >
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
                 <h2 style={{ ...styles.statCardTitle, color: '#32d74b' }}>Total Income</h2>
@@ -380,14 +380,14 @@ export const Dashboard: React.FC<DashboardProps> = ({
               transform: 'translateY(0)',
               transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-4px)';
-              e.currentTarget.style.boxShadow = '0 12px 24px rgba(255, 69, 58, 0.15)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = 'none';
-            }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-4px)';
+                e.currentTarget.style.boxShadow = '0 12px 24px rgba(255, 69, 58, 0.15)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
             >
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
                 <h2 style={{ ...styles.statCardTitle, color: '#ff453a' }}>Total Expenses</h2>
@@ -407,14 +407,14 @@ export const Dashboard: React.FC<DashboardProps> = ({
               transform: 'translateY(0)',
               transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-4px)';
-              e.currentTarget.style.boxShadow = '0 12px 24px rgba(99, 102, 241, 0.15)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = 'none';
-            }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-4px)';
+                e.currentTarget.style.boxShadow = '0 12px 24px rgba(99, 102, 241, 0.15)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
             >
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
                 <h2 style={{ ...styles.statCardTitle, color: '#6366f1' }}>Investments</h2>
@@ -429,21 +429,21 @@ export const Dashboard: React.FC<DashboardProps> = ({
 
             <div style={{
               ...styles.statCard,
-              background: netSavings >= 0 
+              background: netSavings >= 0
                 ? 'linear-gradient(135deg, rgba(50, 215, 75, 0.15) 0%, rgba(50, 215, 75, 0.05) 100%)'
                 : 'linear-gradient(135deg, rgba(255, 69, 58, 0.15) 0%, rgba(255, 69, 58, 0.05) 100%)',
               border: `1px solid ${netSavings >= 0 ? 'rgba(50, 215, 75, 0.3)' : 'rgba(255, 69, 58, 0.3)'}`,
               transform: 'translateY(0)',
               transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-4px)';
-              e.currentTarget.style.boxShadow = `0 12px 24px ${netSavings >= 0 ? 'rgba(50, 215, 75, 0.2)' : 'rgba(255, 69, 58, 0.2)'}`;
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = 'none';
-            }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-4px)';
+                e.currentTarget.style.boxShadow = `0 12px 24px ${netSavings >= 0 ? 'rgba(50, 215, 75, 0.2)' : 'rgba(255, 69, 58, 0.2)'}`;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
             >
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
                 <h2 style={{ ...styles.statCardTitle, color: netSavings >= 0 ? '#32d74b' : '#ff453a' }}>Net Savings</h2>
@@ -477,22 +477,22 @@ export const Dashboard: React.FC<DashboardProps> = ({
                     const incomeHeight = (data.income / maxValue) * 100;
                     const expenseHeight = (data.expenses / maxValue) * 100;
                     const hasData = data.income > 0 || data.expenses > 0;
-                    
+
                     return (
-                      <div key={data.month} style={{ 
-                        flex: 1, 
-                        display: 'flex', 
-                        flexDirection: 'column', 
-                        alignItems: 'center', 
+                      <div key={data.month} style={{
+                        flex: 1,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
                         gap: '0.5rem',
                         opacity: hasData ? 1 : 0.3,
                         transition: 'all 0.3s ease',
                       }}>
-                        <div style={{ 
-                          width: '100%', 
-                          display: 'flex', 
-                          gap: '2px', 
-                          alignItems: 'flex-end', 
+                        <div style={{
+                          width: '100%',
+                          display: 'flex',
+                          gap: '2px',
+                          alignItems: 'flex-end',
                           height: '220px',
                         }}>
                           <div
@@ -535,10 +535,10 @@ export const Dashboard: React.FC<DashboardProps> = ({
                             title={`Expenses: ${formatCurrency(data.expenses)}`}
                           />
                         </div>
-                        <span style={{ 
-                          fontSize: '0.75rem', 
-                          color: 'var(--text-secondary)', 
-                          fontWeight: 500 
+                        <span style={{
+                          fontSize: '0.75rem',
+                          color: 'var(--text-secondary)',
+                          fontWeight: 500
                         }}>{data.month}</span>
                       </div>
                     );
@@ -571,17 +571,17 @@ export const Dashboard: React.FC<DashboardProps> = ({
                     const percentage = (amount / totalExpenses) * 100;
                     const colors = ['#ff453a', '#ff9f0a', '#ffd60a', '#32d74b', '#64d2ff'];
                     const color = colors[index % colors.length];
-                    
+
                     return (
                       <div key={category} style={{ animation: `fadeIn 0.5s ease-out ${index * 0.1}s backwards` }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
                           <span style={{ fontSize: '0.9rem', color: 'var(--text-primary)', fontWeight: 500 }}>{category}</span>
                           <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>{formatCurrency(amount)}</span>
                         </div>
-                        <div style={{ 
-                          width: '100%', 
-                          height: '8px', 
-                          backgroundColor: 'rgba(255,255,255,0.05)', 
+                        <div style={{
+                          width: '100%',
+                          height: '8px',
+                          backgroundColor: 'rgba(255,255,255,0.05)',
                           borderRadius: '4px',
                           overflow: 'hidden',
                         }}>
@@ -631,7 +631,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
                     investment: { bg: 'rgba(99, 102, 241, 0.1)', text: '#6366f1', border: 'rgba(99, 102, 241, 0.2)' },
                   };
                   const colors = typeColors[transaction.type];
-                  
+
                   return (
                     <div
                       key={transaction.id}
@@ -690,9 +690,9 @@ export const Dashboard: React.FC<DashboardProps> = ({
                             {transaction.source}
                           </p>
                           <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                            <span style={{ 
-                              fontSize: '0.75rem', 
-                              color: colors.text, 
+                            <span style={{
+                              fontSize: '0.75rem',
+                              color: colors.text,
                               textTransform: 'capitalize',
                               fontWeight: 600,
                             }}>
@@ -706,9 +706,9 @@ export const Dashboard: React.FC<DashboardProps> = ({
                         </div>
                       </div>
                       <div style={{ textAlign: 'right' }}>
-                        <p style={{ 
-                          fontSize: '1.1rem', 
-                          fontWeight: 700, 
+                        <p style={{
+                          fontSize: '1.1rem',
+                          fontWeight: 700,
                           color: colors.text,
                           marginBottom: '0.25rem',
                         }}>
@@ -787,6 +787,43 @@ export const Dashboard: React.FC<DashboardProps> = ({
               to {
                 opacity: 1;
                 transform: translateX(0);
+              }
+            }
+            
+            @media (max-width: 768px) {
+              .dashboard-container {
+                padding: 0 0.5rem 1rem 0.5rem !important;
+                overflow: auto !important;
+              }
+              
+              .stats-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 0.75rem !important;
+              }
+              
+              .stats-grid > div {
+                padding: 0.75rem !important;
+              }
+              
+              .stats-grid h2 {
+                font-size: 0.65rem !important;
+              }
+              
+              .stats-grid p {
+                font-size: 1.5rem !important;
+              }
+              
+              /* Fix insights container - stack vertically on mobile */
+              .dashboard-container > div:nth-child(3) {
+                flex-direction: column !important;
+                gap: 1rem !important;
+              }
+              
+              /* Make insight list containers full width and visible */
+              .dashboard-container > div:nth-child(3) > div {
+                width: 100% !important;
+                max-width: 100% !important;
+                overflow: visible !important;
               }
             }
           `}</style>

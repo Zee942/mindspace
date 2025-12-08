@@ -56,9 +56,41 @@ def update_task(task_id: str, task_update: schemas.TaskUpdate, db: Session = Dep
     
     update_data = task_update.model_dump(exclude_unset=True)
     
+    # Handle subtasks separately
+    subtasks_data = update_data.pop('subtasks', None)
+    
     try:
+        # Update basic task fields
         for key, value in update_data.items():
             setattr(db_task, key, value)
+        
+        # Sync subtasks if provided
+        if subtasks_data is not None:
+            # Get existing subtask IDs
+            existing_subtask_ids = {st.id for st in db_task.subtasks}
+            incoming_subtask_ids = {st['id'] for st in subtasks_data}
+            
+            # Delete removed subtasks
+            for subtask in list(db_task.subtasks):
+                if subtask.id not in incoming_subtask_ids:
+                    db.delete(subtask)
+            
+            # Update or create subtasks
+            for st_data in subtasks_data:
+                if st_data['id'] in existing_subtask_ids:
+                    # Update existing subtask
+                    existing_st = next(s for s in db_task.subtasks if s.id == st_data['id'])
+                    existing_st.content = st_data['content']
+                    existing_st.completed = st_data['completed']
+                else:
+                    # Create new subtask
+                    new_subtask = models.Subtask(
+                        id=st_data['id'],
+                        task_id=task_id,
+                        content=st_data['content'],
+                        completed=st_data['completed']
+                    )
+                    db.add(new_subtask)
         
         db.commit()
         db.refresh(db_task)

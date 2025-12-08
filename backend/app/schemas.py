@@ -112,11 +112,18 @@ class TaskCreate(TaskBase):
     model_config = ConfigDict(populate_by_name=True)
 
 
+class SubtaskInput(BaseModel):
+    id: str
+    content: str
+    completed: bool = False
+
+
 class TaskUpdate(BaseModel):
     content: Optional[str] = None
     status: Optional[TaskStatus] = None
     skill_id: Optional[str] = Field(None, alias="skillId", serialization_alias="skillId")
     goal_id: Optional[str] = Field(None, alias="goalId", serialization_alias="goalId")
+    subtasks: Optional[List[SubtaskInput]] = None
     
     model_config = ConfigDict(populate_by_name=True)
 

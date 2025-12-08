@@ -182,13 +182,13 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
       context.beginPath();
       links.forEach(d => {
         // Handle both Node objects and string IDs
-        const sourceNode = typeof d.source === 'string' 
+        const sourceNode = typeof d.source === 'string'
           ? nodes.find(n => n.id === d.source)
           : d.source as Node;
         const targetNode = typeof d.target === 'string'
           ? nodes.find(n => n.id === d.target)
           : d.target as Node;
-        
+
         if (sourceNode && targetNode && sourceNode.x != null && sourceNode.y != null && targetNode.x != null && targetNode.y != null) {
           context.moveTo(sourceNode.x, sourceNode.y);
           context.lineTo(targetNode.x, targetNode.y);
@@ -286,17 +286,17 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
         } else if (d.type === 'Link') {
           // Chain link icon - two connected ovals
           const size = 6 * scale;
-          
+
           // Left oval
           context.beginPath();
           context.ellipse(d.x! - size * 0.45, d.y!, size * 0.35, size * 0.55, -Math.PI / 4, 0, 2 * Math.PI);
           context.fill();
-          
+
           // Right oval
           context.beginPath();
           context.ellipse(d.x! + size * 0.45, d.y!, size * 0.35, size * 0.55, Math.PI / 4, 0, 2 * Math.PI);
           context.fill();
-          
+
           // Connection bar
           context.beginPath();
           context.moveTo(d.x! - size * 0.15, d.y! - size * 0.4);
@@ -468,12 +468,12 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
         // Keep node fixed at dragged position
         event.subject.fx = event.subject.x;
         event.subject.fy = event.subject.y;
-        
+
         // Update node in database with new position
         if (setNodes) {
-          setNodes(prev => prev.map(n => 
-            n.id === event.subject.id 
-              ? { ...n, x: event.subject.x, y: event.subject.y } 
+          setNodes(prev => prev.map(n =>
+            n.id === event.subject.id
+              ? { ...n, x: event.subject.x, y: event.subject.y }
               : n
           ));
         }
@@ -513,16 +513,17 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
   }, [nodes, links, connectMode, onNodeClickConnect, setSelectedNodeId, setTooltip, searchTerm, selectedNodeId]);
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+    <div style={{ position: 'relative', width: '100%', height: '100%' }} className="graph-canvas-container">
       <canvas
         ref={canvasRef}
         style={{
           width: '100%',
           height: '100%',
-          cursor: connectMode.active ? 'crosshair' : 'grab'
+          cursor: connectMode.active ? 'crosshair' : 'grab',
+          touchAction: 'none', // Allow D3 to handle touch events
         }}
       />
-      
+
       {/* Legend */}
       <div style={{
         position: 'absolute',
@@ -547,7 +548,7 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
         }}>
           LEGEND
         </div>
-        
+
         {[
           { type: 'Task', shape: '▲', color: badgeColors.Task },
           { type: 'Skill', shape: '●', color: badgeColors.Skill },
